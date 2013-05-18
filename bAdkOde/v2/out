@@ -1,0 +1,232 @@
+rm: cannot remove `*.class': No such file or directory
+.\SymbolTable.java:218: <identifier> expected
+                     varName.indexOf("~") >= 0 || 
+                                    ^
+.\SymbolTable.java:1275: ';' expected
+    }
+     ^
+.\SymbolTable.java:218: cannot resolve symbol
+symbol  : class indexOf  
+location: package varName
+                     varName.indexOf("~") >= 0 || 
+                            ^
+.\SymbolTable.java:58: cannot resolve symbol
+symbol  : method GetToken  ()
+location: class SymbolTable
+	      GetToken();
+              ^
+.\SymbolTable.java:70: cannot resolve symbol
+symbol  : variable LanguageTokens  
+location: class SymbolTable
+	     tokens = new StringTokenizer(DeclarationString, LanguageTokens, true);
+                                                             ^
+.\SymbolTable.java:71: cannot resolve symbol
+symbol  : method GetToken  ()
+location: class SymbolTable
+	     GetToken();
+             ^
+.\SymbolTable.java:83: addVariable(java.lang.String) in SymbolTable cannot be applied to ()
+		   addVariable();
+                   ^
+.\SymbolTable.java:124: cannot resolve symbol
+symbol  : method GetToken  ()
+location: class SymbolTable
+                GetToken();
+                ^
+.\SymbolTable.java:138: cannot resolve symbol
+symbol  : method GetToken  ()
+location: class SymbolTable
+		      GetToken();
+                      ^
+.\SymbolTable.java:158: cannot resolve symbol
+symbol  : method GetToken  ()
+location: class SymbolTable
+              GetToken();
+              ^
+.\SymbolTable.java:160: cannot resolve symbol
+symbol  : method isValidVarname  ()
+location: class SymbolTable
+	      if(isValidVarname())
+                 ^
+.\SymbolTable.java:162: cannot resolve symbol
+symbol  : method GetToken  ()
+location: class SymbolTable
+                 GetToken();
+                 ^
+.\SymbolTable.java:166: cannot resolve symbol
+symbol  : method GetToken  ()
+location: class SymbolTable
+                    GetToken();
+                    ^
+.\SymbolTable.java:170: cannot resolve symbol
+symbol  : method GetToken  ()
+location: class SymbolTable
+		       GetToken();
+                       ^
+.\SymbolTable.java:172: cannot resolve symbol
+symbol  : method isValidCastType  ()
+location: class SymbolTable
+		       if(isValidCastType())
+                          ^
+.\SymbolTable.java:174: cannot resolve symbol
+symbol  : method GetToken  ()
+location: class SymbolTable
+                          GetToken();
+                          ^
+.\SymbolTable.java:178: cannot resolve symbol
+symbol  : method GetToken  ()
+location: class SymbolTable
+                             GetToken();
+                             ^
+.\SymbolTable.java:202: cannot resolve symbol
+symbol  : method GetToken  ()
+location: class SymbolTable
+		       GetToken();
+                       ^
+.\Evaluator.java:108: cannot resolve symbol
+symbol  : method doesVariableExist  (java.lang.String)
+location: class SymbolTable
+              if(!currentSymbolTable.doesVariableExist(VarName))
+                                    ^
+.\Evaluator.java:117: cannot resolve symbol
+symbol  : method getTypeOf  (java.lang.String)
+location: class SymbolTable
+                 VarType = currentSymbolTable.getTypeOf(VarName);
+                                             ^
+.\Evaluator.java:141: cannot resolve symbol
+symbol  : method getTypeOf  (java.lang.String)
+location: class SymbolTable
+                       VarType = currentSymbolTable.getTypeOf(VarName);
+                                                   ^
+.\Evaluator.java:144: cannot resolve symbol
+symbol  : method setNewValue  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+		       currentSymbolTable.setNewValue(VarName, VarType, result);
+                                         ^
+.\Evaluator.java:221: cannot resolve symbol
+symbol  : method typeOf  (java.lang.String)
+location: class SymbolTable
+			   TokenType = currentSymbolTable.typeOf(VarName);
+                                                         ^
+.\Evaluator.java:235: cannot resolve symbol
+symbol  : method setType  (java.lang.String,java.lang.String)
+location: class SymbolTable
+                                 currentSymbolTable.setType(ResultName, ResultType);
+                                                   ^
+.\Evaluator.java:273: cannot resolve symbol
+symbol  : method doesVariableExist  (java.lang.String)
+location: class SymbolTable
+                                          if(!currentSymbolTable.doesVariableExist(VarName))
+                                                                ^
+.\Evaluator.java:282: cannot resolve symbol
+symbol  : method getStringValueOf  (java.lang.String)
+location: class SymbolTable
+                                             VarValue = currentSymbolTable.getStringValueOf(VarName);
+                                                                          ^
+.\Evaluator.java:302: cannot resolve symbol
+symbol  : method getTypeOf  (java.lang.String)
+location: class SymbolTable
+						   VarType = currentSymbolTable.getTypeOf(VarName);
+                                                                               ^
+.\Evaluator.java:325: cannot resolve symbol
+symbol  : method getDoubleValueOf  (java.lang.String)
+location: class SymbolTable
+                                                            TempStack.push(new Double(sign * currentSymbolTable.getDoubleValueOf(VarName)).toString());
+                                                                                                               ^
+.\Evaluator.java:332: cannot resolve symbol
+symbol  : method getFloatValueOf  (java.lang.String)
+location: class SymbolTable
+                                                               TempStack.push(new Float(sign * currentSymbolTable.getFloatValueOf(VarName)).toString());
+                                                                                                                 ^
+.\Evaluator.java:337: cannot resolve symbol
+symbol  : method getIntValueOf  (java.lang.String)
+location: class SymbolTable
+                                                               TempStack.push(new Integer(sign * currentSymbolTable.getIntValueOf(VarName)).toString());
+                                                                                                                   ^
+.\Evaluator.java:389: cannot resolve symbol
+symbol  : method typeOf  (java.lang.String)
+location: class SymbolTable
+			   TokenType = currentSymbolTable.typeOf(Token);
+                                                         ^
+.\Evaluator.java:394: cannot resolve symbol
+symbol  : method setType  (java.lang.String,java.lang.String)
+location: class SymbolTable
+                              currentSymbolTable.setType(ResultName, ResultType);
+                                                ^
+.\Evaluator.java:451: cannot resolve symbol
+symbol  : method doesVariableExist  (java.lang.String)
+location: class SymbolTable
+                                             if(!currentSymbolTable.doesVariableExist(VarName))
+                                                                   ^
+.\Evaluator.java:460: cannot resolve symbol
+symbol  : method getStringValueOf  (java.lang.String)
+location: class SymbolTable
+                                                VarValue = currentSymbolTable.getStringValueOf(VarName);
+                                                                             ^
+.\Evaluator.java:480: cannot resolve symbol
+symbol  : method getTypeOf  (java.lang.String)
+location: class SymbolTable
+						      VarType = currentSymbolTable.getTypeOf(VarName);
+                                                                                  ^
+.\Evaluator.java:503: cannot resolve symbol
+symbol  : method getDoubleValueOf  (java.lang.String)
+location: class SymbolTable
+                                                              TempStack.push(new Double(currentSymbolTable.getDoubleValueOf(VarName)).toString());
+                                                                                                          ^
+.\Evaluator.java:510: cannot resolve symbol
+symbol  : method getFloatValueOf  (java.lang.String)
+location: class SymbolTable
+                                                                  TempStack.push(new Float(currentSymbolTable.getFloatValueOf(VarName)).toString());
+                                                                                                             ^
+.\Evaluator.java:515: cannot resolve symbol
+symbol  : method getIntValueOf  (java.lang.String)
+location: class SymbolTable
+                                                                  TempStack.push(new Integer(currentSymbolTable.getIntValueOf(VarName)).toString());
+                                                                                                               ^
+.\Evaluator.java:675: cannot resolve symbol
+symbol  : method typeOf  (java.lang.String)
+location: class SymbolTable
+	    VarType = currentSymbolTable.typeOf(op1);
+                                        ^
+.\Interpreter.java:254: PrintCommand(java.util.StringTokenizer) in IO cannot be applied to (java.util.StringTokenizer,boolean)
+                error = ScriptIO.PrintCommand(tokens, runstmt);
+                                ^
+.\Interpreter.java:280: cannot resolve symbol
+symbol  : method setRun  (boolean)
+location: class SymbolTable
+			CurrentSymbolTable.setRun(runstmt);
+                                          ^
+.\Interpreter.java:281: addIdentifier(java.lang.String,boolean) in SymbolTable cannot be applied to (java.lang.String)
+                        error = CurrentSymbolTable.addIdentifier(CurrentToken);
+                                                  ^
+.\Interpreter.java:293: cannot resolve symbol
+symbol  : method doesVariableExist  (java.lang.String)
+location: class SymbolTable
+                      if(CurrentSymbolTable.doesVariableExist(CurrentToken))
+                                           ^
+.\Interpreter.java:297: cannot resolve symbol
+symbol  : method setRun  (boolean)
+location: class Evaluator
+		           ExpressionEvaluator.setRun(runstmt);
+                                              ^
+.\Interpreter.java:313: cannot resolve symbol
+symbol  : method display  ()
+location: class SymbolTable
+                            CurrentSymbolTable.display();
+                                              ^
+.\IO.java:137: cannot resolve symbol
+symbol  : method getVariable  (java.lang.String)
+location: class SymbolTable
+		   OutputString += CurrentSymbolTable.getVariable(CurrentToken.trim());
+                                                     ^
+.\IO.java:275: cannot resolve symbol
+symbol  : variable Tokenizer  
+location: class IO
+	     tokens = Tokenizer;
+                      ^
+.\IO.java:284: cannot resolve symbol
+symbol  : method delimeters  ()
+location: class IO
+	     delimeters();
+             ^
+48 errors

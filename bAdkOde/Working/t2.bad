@@ -1,0 +1,7 @@
+int abc = 6;
+int acx = abc;
+
+>abc + acx;
+>"\n";
+
+int acc = acc;

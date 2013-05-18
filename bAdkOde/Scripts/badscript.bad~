@@ -1,0 +1,94 @@
+>"This is a bAdkOde script.\n";
+>"The interpreter was created in Java by Vivin Suresh Paliath.\n\n";
+>"This interpreter, as of now, supports:\n\n";
+>"1. The Print statement with all escape characters and concatenation.\n";
+>"2. Creation (with casting) and Printing of variables.\n";
+>"3. Input into variables (defined or undefined).\n\n";
+
+>"The Print statement in bAdkOde takes the following form:\n\n";
+>">{String to Print};\n\n";
+>"An example is:\n\n";
+>">\"Goodbye Cruel World!\";\n\n";
+>"Now the torture test for the print statement!\n\n";
+
+>"\\\\\\\"\"" + "\\\\\"+++;;;;\";\";\"+\"+\\;\\;\\;\\+\\+\\+\"\"\"\\\\\"" + "\n";
+
+>"Press Enter to continue...";
+<pause;
+
+>"The syntax for creating variables in bAdkOde is the same as C, C++ or Java.\n\n";
+>"Examples of variable declaration in bAdkOde are:\n\n";
+>"char charVar = 'c';\n";
+>"int intVar = 5;\n";
+>"float floatVar = 4.5;\n";
+>"double doubleVar = 3.141592654;\n\n";
+>"To prove that it works, have a look at this output:\n\n";
+
+char charVar = 'c';
+int intVar = 5;
+float floatVar = 4.5;
+double doubleVar = 3.141592654;
+
+>"charVar is of type char and has value " + charVar + "\n";
+>"intVar is of type int and has value " + intVar + "\n";
+>"floatVar is of type float and has value " + floatVar + "\n";
+>"doubleVar is of type float and has value " + doubleVar + "\n\n";
+>"\n\n\n\n";
+
+>"Press Enter to continue...";
+<pause;
+
+>"Explicit casting is also supported. Examples are:\n\n";
+
+>"int icfDouble = (int) 55.324;\n";
+>"char ccfDouble = (char) 65.002;\n\n";
+
+char ccfDouble = (char) 65.002;
+int icfDouble = (int) 55.324;
+
+double oriDouble = 55.324;
+double orcDouble = 65.002;
+
+>"The results of casting:\n\n";
+>"Original double value: " + oriDouble + "\n";
+>"Double casted to int value: " + icfDouble + "\n";
+>"\nOriginal double value: " + orcDouble + "\n";
+>"Double casted to char value: " + ccfDouble + "\n\n";
+
+>"\n\n\n\n\n\n\n\n";
+
+>"Press Enter to continue...";
+<pause;
+
+>"The Input statement in bAdkOde takes the following form:\n\n";
+>"<{variable name};\n\n";
+>"An example is:\n\n";
+>"<number;\n\n";
+
+>"Try this out...\n\n";
+
+int num1;
+int num2;
+
+>"Enter a number:";
+<num1;
+
+>"Enter another number:";
+<num2;
+
+>"The numbers entered were " + num1 + " and " + num2 + ".\n\n";
+>"bAdkOde will also accept input for an undefined variable.\n";
+>"For example, if you assume in the previous example that the variable \"number\"\n";
+>"wasn't defined, and you entered some value, this variable is automatically\ncreated and is assigned a type based on the Input entered.\n\n";
+>"For example, enter some values for the following (of different types):\n\n";
+
+>"Enter something:";
+<something;
+>"Enter something else:";
+<somethingelse;
+
+>"I will now terminate the script with an error. You should see the variables\nin the symbol table with types based on the input you entered.\n";
+>"The variable names are something (the first prompt) and somethingelse (the\nsecond prompt).\n";
+<pause;
+q
+

@@ -1,0 +1,14 @@
+>"This is a bAdkOde script.\n";
+>"The interpreter was created in Java by Vivin Suresh Paliath.\n\n";
+>"This interpreter, as of now, supports:\n\n";
+>"1. The Print statement with all escape characters and concatenation.\n";
+>"2. Creation (with casting) and Printing of variables.\n";
+>"3. Input into variables (defined or undefined).\n\n";
+
+>"The Print statement in bAdkOde takes the following form:\n\n";
+#>">{String to Print};\n\n";
+>"An example is:\n\n";
+>">\"Goodbye Cruel World!\";\n\n";
+>"Now the torture test for the print statement!\n\n";
+
+>"\\\\\\\"\"" , "\\\\\"+++;;;;\";\";\"+\"+\\;\\;\\;\\+\\+\\+\"\"\"\\\\\"" , "\n";

@@ -1,0 +1,4 @@
+catch unreported expceptions and display appropriate error messages...
+finish copyArray
+modify setNewValue
+to implement copy array, try to have a method that returns entire Variable array or try to set it value by value osomething.

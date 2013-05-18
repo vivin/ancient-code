@@ -1,0 +1,145 @@
+My CSE340 class is teaching me a lot about parsers... so I have decided to rewrite bAdkOde using EBNFs and recursive descent parsers... should be cool. I have come up with the following EBNFs so far... 
+
+<bAdkOde-script> ::= [ { <integrate-stmt> } ] { [<function-decl>] [typedef] } <bAdkOde-stmts>
+<integrate-stmt> ::= integrate MODULENAME ';'
+<function-decl>  ::= func METHODNAME '(' <param> {, <param> } ')' ':' <return-type> '<' <function-body> '>'
+<typedef>        ::= typedef TYPENAME '<' <attributes> '>' ';'
+<params>         ::= <type> PARAMNAME
+<function-body>  ::= <bAdkOde-stmts>
+<bAdkOde-stmts>  ::= <bAdkOde-stmt> { <bAdkOde-stmt> }
+<bAdkOde-stmt>   ::= <print-stmt> | <input-stmt> | <var-declaration> | <arr-declaration> | <selection-stmt> | <loop-stmt>
+<selection-stmt> ::= <if-stmt> | <case-stmt>
+<if-stmt>        ::= if '(' <cond> ')' '<' <bAdkOde-stmts> '>' [ else '<' <bAdkOde-stmts> '>' ]
+<case-stmt>      ::= switch '(' <identifier> ')' '<' <case-block> { <case-block> }  <default> '>'
+<case-block>     ::= doif <value> : <bAdkOde-stmts> [ break ';' ]
+<default>        ::= default : <bAdkOde-stmts> [ break ';' ]
+
+func cool(int a, int b) : int
+<
+     if(a<b)
+     <
+        echo
+     >
+
+     else
+     <
+        if(c<d)
+	<
+	   echo
+	>
+
+	else
+	<
+	   if(e>f)
+	   <
+	      echo
+	   >
+	>
+     >
+>
+
+typedef date
+<
+        int month, day, year;
+>
+
+typedef student
+<
+        char@ name{};
+	char@ dob{10};
+	char@ email{};
+	int   idnum;
+>
+
+switch(a)
+<
+      doif 'c' : >"a\n";
+                 break;
+
+      doif 'k' : >"k\n";
+                 break;
+>
+
+I have changed the concatenation operation to ','. I think this would resolve ambiguities with expressions like should a + b print the sum or the values of a and b concatenated together?
+
+Sample print statements:
+
+print "This is a print statement... hahaha\n";
+print "The sum of a and b is: ", sum, "\n";
+print "The sum of a and b is: ", (a + b), "\n";
+print "The sum of {a} and {b} is: {sum}\n";
+print sum, "\n";
+print sum;
+print a, b, c
+
+{a} means interpolation. The value of a is interpolated.
+
+<print-stmt>    ::= 'print ' <print-string> { , <print-string> } ';'
+<print-string>  ::= <quoted-string> | <exp>
+<quoted-string> ::= '"' <string> { <string> } '"'
+<string>        ::= <str> | '{' <varname> '}'
+<str>           ::= <char>{<char>}
+<char>          ::= BADKODE-CHARACTER-SET
+
+*** Note a change... '>' is no longer the print command. The new print command is 'print'
+
+This EBNF should allow the reading in of multiple values. 
+
+Sample input statements:
+
+input [":,."]var1<var2<var3;
+input [delim_str]var1<var2<var3;
+input var1;
+input var1<var2<var3;
+
+By default, spaces are used as delimeters.
+
+*after this statement has been validated, we keep track of delimeters and the variables entered. Then we read in from stdin and parse and split according to [delims] and store values in the variables.
+
+<input-stmt>       ::= 'input ' [ <delimeters> ] <var> { '<' <var> } ';'
+<delimeters>       ::= '[' <delimeter-string> | <string-var> ']'
+<delimeter-string> ::= '"' <str> '"'                                ---> refer to rule in <print-stmt>
+
+*** Note a change... '<' is no longer the input command. It is 'input'. 
+
+Variable Declaration (supporting casting)
+
+Sample variable declarations:
+
+int a, b, c = 6, d;
+int b;
+int d = 5;
+int val = (int) 3.14;
+int a = 5, val3 = (int) 45.15, val;
+
+<var-declaration>      ::= <var-type> <assignment-statement> { , <assignment-statment> } ';'
+<assignment-statement> ::= <var-name> [ '=' [ '(' <cast-type> ')' ] <exp> ]
+
+Invalid array names:
+
+Array Declaration
+Note: array types are like vartypes but have an '@' appended to the end. eg: int@ or char@
+
+Sample array declaration statement:
+
+int@ num_arr0{5} = [1, 2, 3, 4, 5];
+int@ num_arr1{5} = num_arr0;
+int@ num_arr2{9} = [1, 2, 3, 4, <5>];
+int@ num_arr3{9} = [<val>];
+int@ num_arr5{};
+int@ num_arr9{3};
+int@ na1{5} = [1, 2, 3, 4, 5], na2{}, na4{5}, na3{9} = [<val>];
+
+
+<arr-declaration>          ::= <arr-type> <arr-assignment-statement> { , <arr-assignment-statement> } ';'
+<arr-assignment-statement> ::= <varname> '{' ( <the-rest> | <the-rest-dynamic> )
+<the-rest>                 ::= <exp> '}' [ '=' <rvalue> ]
+<rvalue>                   ::= <value-list> | <array>
+<value-list>               ::= '[' <fill-value> | <mixed> ']' 
+<fill-value>               ::= '<' <exp> '>'
+<mixed>                    ::= <exp> , { <exp> } [ '<' <exp> '>' ]
+<the-rest-dynamic>         ::= '}' [ '=' <array> ]; 
+
+* Notes to self
+ 
+  Consider importing modules... Modules will contain only functions and/or type definitions.

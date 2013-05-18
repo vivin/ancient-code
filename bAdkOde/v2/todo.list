@@ -1,0 +1,21 @@
+put each line of the file into a dynamic string array.
+parse entire file and get all errors
+get locations of functions (array locations)
+if import statments are encountered, the corresponding import statement is
+replaced by code from the import file
+you were working on Interpeter.java, putting everything into a vector... implemented the vector part... now you need to put some modifications in badkode.java and interpreter.java to fulfill this crazy scheme.
+>>>
+Each import file is interpreted separately by the Script object. Visibility is provided to all functions and types defined in the file.
+>>>
+
+You were working on finishing the implementing the input statement.
+Specifically, you were working on delimeters.
+
+>>>
+
+Delimeters is finished. You are working on var - the part on inputting variables and storing
+values.
+
+[just a thought - consider implementing file reading and writing]
+
+After this, move onto SymbolTable.java and clean up the mess there...

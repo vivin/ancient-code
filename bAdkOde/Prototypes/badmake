@@ -1,0 +1,3 @@
+echo Building Interpreter...
+rm *.class
+javac bAdkOde.java

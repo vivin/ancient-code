@@ -1,0 +1,283 @@
+Interpreter.java:256: ';' expected
+                   error = ScriptIO.parse()
+                                           ^
+.\SymbolTable.java:67: ')' expected
+	     return addIdentifier(String KeyWord, true);
+                                         ^
+.\SymbolTable.java:244: ';' expected
+		      CurrentType.compareTo("boolean") == 0)
+                                                            ^
+.\SymbolTable.java:272: ';' expected
+                        CurrentToken.indexOf("]") >= 0)
+                                                       ^
+.\Evaluator.java:20: illegal start of type
+    private boolean parensCheck(String Expr)
+    ^
+.\Evaluator.java:829: <identifier> expected
+    }
+     ^
+Interpreter.java:256: cannot resolve symbol
+symbol  : method parse  ()
+location: class IO
+                   error = ScriptIO.parse()
+                                   ^
+Interpreter.java:261: PrintCommand(java.util.StringTokenizer) in IO cannot be applied to ()
+		   ScriptIO.PrintCommand();
+                           ^
+Interpreter.java:271: cannot resolve symbol
+symbol  : method parse  ()
+location: class IO
+		      error = ScriptIO.parse();
+                                      ^
+Interpreter.java:276: InputCommand(java.util.StringTokenizer) in IO cannot be applied to ()
+		      ScriptIO.InputCommand();
+                              ^
+Interpreter.java:326: cannot resolve symbol
+symbol  : method parse  (java.util.StringTokenizer,java.lang.String)
+location: class Evaluator
+			      error = ExpressionEvaluator.parse(tokens, CurrentToken);
+                                                         ^
+Interpreter.java:331: cannot resolve symbol
+symbol  : method Evaluate  (java.util.StringTokenizer,java.lang.String)
+location: class Evaluator
+                              error = ExpressionEvaluator.Evaluate(tokens, CurrentToken);
+                                                         ^
+.\SymbolTable.java:67: cannot resolve symbol
+symbol  : variable String  
+location: class SymbolTable
+	     return addIdentifier(String KeyWord, true);
+                                  ^
+.\SymbolTable.java:79: cannot resolve symbol
+symbol  : variable LanguageTokens  
+location: class SymbolTable
+	     tokens = new StringTokenizer(DeclarationString, LanguageTokens, true);
+                                                             ^
+.\SymbolTable.java:95: cannot resolve symbol
+symbol  : method addVariable  ()
+location: class SymbolTable
+		   addVariable();
+                   ^
+.\SymbolTable.java:172: cannot resolve symbol
+symbol  : method isValidVarname  ()
+location: class SymbolTable
+	      if(isValidVarname())
+                 ^
+.\SymbolTable.java:240: cannot resolve symbol
+symbol  : variable CurrentType  
+location: class SymbolTable
+	      return (CurrentType.compareTo("char") == 0 ||
+                      ^
+.\SymbolTable.java:241: cannot resolve symbol
+symbol  : variable CurrentType  
+location: class SymbolTable
+		      CurrentType.compareTo("int") == 0 ||
+                      ^
+.\SymbolTable.java:242: cannot resolve symbol
+symbol  : variable CurrentType  
+location: class SymbolTable
+		      CurrentType.compareTo("float") == 0 ||
+                      ^
+.\SymbolTable.java:243: cannot resolve symbol
+symbol  : variable CurrentType  
+location: class SymbolTable
+		      CurrentType.compareTo("double") == 0 ||
+                      ^
+.\SymbolTable.java:244: cannot resolve symbol
+symbol  : variable CurrentType  
+location: class SymbolTable
+		      CurrentType.compareTo("boolean") == 0)
+                      ^
+.\SymbolTable.java:301: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                addVariable(varName, varType, getStringValueOf(Expression));
+                ^
+.\SymbolTable.java:308: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                   addVariable(varName, varType, getStringValueOf(Expression));                                                
+                   ^
+.\SymbolTable.java:315: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                      addVariable(varName, varType, getStringValueOf(Expression));
+                      ^
+.\SymbolTable.java:322: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                         addVariable(varName, varType, getStringValueOf(Expression));
+                         ^
+.\SymbolTable.java:329: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                            addVariable(varName, varType, getStringValueOf(Expression));
+                            ^
+.\SymbolTable.java:362: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                   addVariable(varName, varType, new Double((double) Expression.charAt(1)).toString());
+                   ^
+.\SymbolTable.java:367: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                   addVariable(varName, varType, new Double(Expression).toString());
+                   ^
+.\SymbolTable.java:377: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                      addVariable(varName, varType, new Float((float) Expression.charAt(1)).toString());
+                      ^
+.\SymbolTable.java:382: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                      addVariable(varName, varType, new Float(Expression).toString());
+                      ^
+.\SymbolTable.java:392: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                         addVariable(varName, varType, new Integer((int) Expression.charAt(1)).toString());
+                         ^
+.\SymbolTable.java:397: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                         addVariable(varName, varType, new Integer(Expression).toString());
+                         ^
+.\SymbolTable.java:405: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                         addVariable(varName, varType, new StringBuffer("").append(Expression.charAt(1)).toString());
+                         ^
+.\SymbolTable.java:412: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                            addVariable(varName, varType, new Boolean(Expression).toString());
+                            ^
+.\SymbolTable.java:454: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                   addVariable(varName, varType, new Double(new Integer((int) Expression.charAt(1)).toString()).toString());
+                   ^
+.\SymbolTable.java:461: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                      addVariable(varName, varType, new Double((int) new Double(Expression).doubleValue()).toString());
+                      ^
+.\SymbolTable.java:468: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                         addVariable(varName, varType, new Double(new Float((float) Expression.charAt(1)).toString()).toString());
+                         ^
+.\SymbolTable.java:475: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                            addVariable(varName, varType, new Double(new Float(Expression).toString()).toString());
+                            ^
+.\SymbolTable.java:482: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                               addVariable(varName, varType, new Double((double) Expression.charAt(1)).toString());
+                               ^
+.\SymbolTable.java:489: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                                  addVariable(varName, varType, new Double((int) new Double(Expression).doubleValue()).toString());
+                                  ^
+.\SymbolTable.java:496: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                                     addVariable(varName, varType, new Double((double) Expression.charAt(1)).toString());
+                                     ^
+.\SymbolTable.java:503: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                                        addVariable(varName, varType, new Double(Expression).toString());
+                                        ^
+.\SymbolTable.java:526: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                      addVariable(varName, varType, new Float(new Integer ((int) Expression.charAt(1)).toString()).toString());
+                      ^
+.\SymbolTable.java:533: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                         addVariable(varName, varType, new Float((int) new Double(Expression).doubleValue()).toString());
+                         ^
+.\SymbolTable.java:540: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                            addVariable(varName, varType, new Float(new Integer((int) Expression.charAt(1)).toString()).toString());
+                            ^
+.\SymbolTable.java:547: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                               addVariable(varName, varType, new Float((int) new Float(Expression).floatValue()).toString());
+                               ^
+.\SymbolTable.java:554: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                                  addVariable(varName, varType, new Float((float) Expression.charAt(1)).toString());
+                                  ^
+.\SymbolTable.java:561: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                                     addVariable(varName, varType, new Float(Expression).toString());
+                                     ^
+.\SymbolTable.java:582: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                         addVariable(varName, varType, new Integer((int) Expression.charAt(1)).toString());
+                         ^
+.\SymbolTable.java:589: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                            addVariable(varName, varType, new Integer((int) new Double(Expression).doubleValue()).toString());
+                            ^
+.\SymbolTable.java:596: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                               addVariable(varName, varType, new Integer((int) Expression.charAt(1)).toString());
+                               ^
+.\SymbolTable.java:603: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                                  addVariable(varName, varType, new Integer((int) new Double(Expression).doubleValue()).toString());
+                                  ^
+.\SymbolTable.java:622: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                            addVariable(varName, varType, new StringBuffer("").append(Expression.charAt(1)).toString());
+                            ^
+.\SymbolTable.java:629: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                               addVariable(varName, varType, new StringBuffer("").append((char) new Double(Expression).doubleValue()).toString());
+                               ^
+.\SymbolTable.java:646: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,java.lang.String)
+location: class SymbolTable
+                               addVariable(varName, varType, new Boolean(Expression).toString());
+                               ^
+.\SymbolTable.java:803: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,<null>)
+location: class SymbolTable
+                          addVariable(varName, varType, null);
+                          ^
+.\SymbolTable.java:811: cannot resolve symbol
+symbol  : method addVariable  (java.lang.String,java.lang.String,<null>)
+location: class SymbolTable
+                             addVariable(varName, varType, null); 
+                             ^
+.\Evaluator.java:19: missing method body, or declare abstract
+    public boolean validate(
+                   ^
+.\IO.java:275: cannot resolve symbol
+symbol  : variable Tokenizer  
+location: class IO
+	     tokens = Tokenizer;
+                      ^
+.\IO.java:284: cannot resolve symbol
+symbol  : method delimeters  ()
+location: class IO
+	     delimeters();
+             ^
+60 errors

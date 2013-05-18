@@ -1,0 +1,116 @@
+#
+# This is a bAdkOde Scripts
+# The cool thing is that it now has syntax highlighting in Vim :D
+#
+
+use test.bm;
+
+typedef date
+<
+        int month;
+	int day;
+	int year;
+>
+
+func test(int a, int b) : int
+<
+     int c = 0;
+     c = a + b;
+     return c;
+>
+
+
+print "This is a bAdkOde script.\n";
+print "The interpreter was created in Java by Vivin Suresh Paliath.\n\n";
+print "This interpreter, as of now, supports:\n\n";
+print "1. The Print statement with all escape characters and concatenation.\n";
+print "2. Creation (with casting) and Printing of variables.\n";
+print "3. Input into variables (defined or undefined).\n\n";
+
+print "The Print statement in bAdkOde takes the following form:\n\n";
+print "print \"{String to Print};\n\n";
+print "An example is:\n\n";
+print "print \"Goodbye Cruel World!\";\n\n";
+print "Now the torture test for the print statement!\n\n";
+
+print "\\\\\\\"\"" + "\\\\\"+++;;;;\";\";\"+\"+\\;\\;\\;\\+\\+\\+\"\"\"\\\\\"" + "\n";
+
+print "Press Enter to continue...";
+input pause;
+
+print "The syntax for creating variables in bAdkOde is the same as C, C++ or Java.\n\n";
+print "Examples of variable declaration in bAdkOde are:\n\n";
+print "char charVar = 'c';\n";
+print "int intVar = 5;\n";
+print "float floatVar = 4.5;\n";
+print "double doubleVar = 3.141592654;\n\n";
+print "To prove that it works, have a look at this output:\n\n";
+
+char charVar = 'c';
+int intVar = 5;
+float floatVar = 4.5;
+double doubleVar = 3.141592654;
+
+print "charVar is of type char and has value " + charVar + "\n";
+print "intVar is of type int and has value " + intVar + "\n";
+print "floatVar is of type float and has value " + floatVar + "\n";
+print "doubleVar is of type float and has value " + doubleVar + "\n\n";
+print "\n\n\n\n";
+
+print "Press Enter to continue...";
+input pause;
+
+print "Explicit casting is also supported. Examples are:\n\n";
+
+print "int icfDouble = (int) 55.324;\n";
+print "char ccfDouble = (char) 65.002;\n\n";
+
+char ccfDouble = (char) 65.002;
+int icfDouble = (int) 55.324;
+
+double oriDouble = 55.324;
+double orcDouble = 65.002;
+
+print "The results of casting:\n\n";
+print "Original double value: " + oriDouble + "\n";
+print "Double casted to int value: " + icfDouble + "\n";
+print "\nOriginal double value: " + orcDouble + "\n";
+print "Double casted to char value: " + ccfDouble + "\n\n";
+
+print "\n\n\n\n\n\n\n\n";
+
+print "Press Enter to continue...";
+input pause;
+
+print "The Input statement in bAdkOde takes the following form:\n\n";
+print "input {variable name};\n\n";
+print "An example is:\n\n";
+print "input number;\n\n";
+
+print "Try this out...\n\n";
+
+int num1;
+int num2;
+
+print "Enter a number:";
+input num1;
+
+print "Enter another number:";
+input num2;
+
+print "The numbers entered were " + num1 + " and " + num2 + ".\n\n";
+print "bAdkOde will also accept input for an undefined variable.\n";
+print "For example, if you assume in the previous example that the variable \"number\"\n";
+print "wasn't defined, and you entered some value, this variable is automatically\ncreated and is assigned a type based on the Input entered.\n\n";
+print "For example, enter some values for the following (of different types):\n\n";
+
+print "Enter something:";
+input something;
+print "Enter something else:";
+input somethingelse;
+
+print "I will now terminate the script with an error. You should see the variables\nin the symbol table with types based on the input you entered.\n";
+print "The variable names are something (the first prompt) and somethingelse (the\nsecond prompt).\n";
+input pause;
+q
+

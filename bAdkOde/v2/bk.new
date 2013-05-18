@@ -1,0 +1,18 @@
+This is a bAdkOde script.
+The interpreter was created in Java by Vivin Suresh Paliath.
+
+This interpreter, as of now, supports:
+
+1. The Print statement with all escape characters and concatenation.
+2. Creation (with casting) and Printing of variables.
+3. Input into variables (defined or undefined).
+
+The Print statement in bAdkOde takes the following form:
+
+An example is:
+
+>"Goodbye Cruel World!";
+
+Now the torture test for the print statement!
+
+\\\""\\"+++;;;;";";"+"+\;\;\;\+\+\+"""\\"

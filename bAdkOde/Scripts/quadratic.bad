@@ -1,0 +1,23 @@
+double a, b, c, Discriminant, Root1, Root2;
+
+>"This bAdkOde script calculates the roots of a quadratic equation.\n";
+>"I have not yet implemented the if statement so taking the square root of a\nnegative number will result in an exception from Java\n\n";
+
+>"a:";
+<a;
+
+>"b:";
+<b;
+
+>"c:";
+<c;
+
+Discriminant = ((b^2.0) - ((4.0*a)*c));
+
+Root1 = (((-b) + (Discriminant ^ (1.0/2.0))) / (2.0 * a));
+Root2 = (((-b) - (Discriminant ^ (1.0/2.0))) / (2.0 * a));
+
+>"Discriminant is " + Discriminant + "\n";
+>"\nThe roots are " + Root1 + " and " + Root2 + "\n";
+>"\n---The End---\n";
+

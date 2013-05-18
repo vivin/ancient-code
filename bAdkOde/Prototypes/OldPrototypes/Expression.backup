@@ -1,0 +1,575 @@
+import java.util.*;
+import java.io.*;
+
+public class Expression implements Cloneable
+{
+    ObjectStack ExprStack;
+    symbolTable currentSymbolTable;
+
+    public Expression()
+    {
+           currentSymbolTable = new symbolTable();
+    }
+
+    public Expression(symbolTable thisSymbolTable)
+    {
+           currentSymbolTable = thisSymbolTable;
+    }
+
+    public void addToStac (String postfixExpr)
+    {
+           StringTokenizer tokens = new StringTokenizer(postfixExpr);
+           ExprStack = new ObjectStack(tokens.countTokens());
+           ObjectStack TempStack = new ObjectStack(tokens.countTokens());
+
+           while(tokens.hasMoreTokens())
+           {
+                 token = tokens.nextToken().trim();
+
+                 TempStack.push(token);
+           }
+
+           ExprStack = TempStack;
+    }
+
+    public int organizeValueStack()
+    {
+           ObjectStack TempStack;
+           ObjectStack ValueStack = new ObjectStack(ExprStack.size());
+           String VarOp = "";
+           String VarType = "";
+           String CastType = "";
+           String Operand = "";
+           StringTokenizer VarOpTok = new StringTokenizer("");
+           boolean error = false;
+           int errcode = 0;
+
+           TempStack = (ObjectStack) ExprStack.clone();
+
+           while(!TempStack.isEmpty() && !error)
+           {
+                 VarOp = (String) TempStack.pop();
+                 VarOpTok = new StringTokenizer(VarOp, "()");
+                 Operand = VarOpTok.nextToken().trim();
+
+                 if(Operand.compareTo("(") == 0)
+                 {
+                    CastType = VarOpTok.nextToken();
+
+                    Operand = VarOpTok.nextToken();
+
+                    if(Operand.compareTo(")") == 0)
+                    {
+                       Operand = VarOpTok.nextToken();
+
+                       try
+                       {
+                         if(CastType.compareTo("char") == 0)
+                         {
+                            error = true;
+                            errcode = 5;
+                            System.out.println("Cannot perform arithmetic operations on " + Operand + ", which is of type char");
+                         }
+
+                         else
+                         {
+                            if(CastType.compareTo("int") == 0)
+                            {
+                               ValueStack.push(new Integer(currentSymbolTable.getIntValueOf(Operand)));
+                            }
+
+                            else
+                            {
+                               if(CastType.compareTo("float") == 0)
+                               {
+                                  ValueStack.push(new Float(currentSymbolTable.getFloatValueOf(Operand)));
+                               }
+
+                               else
+                               {
+                                  if(CastType.compareTo("double") == 0)
+                                  {
+                                     ValueStack.push(new Double(currentSymbolTable.getDoubleValueOf(Operand)));
+                                  }
+
+                                  else
+                                  {
+                                     if(CastType.compareTo("boolean") == 0)
+                                     {
+                                        //Boolean support later
+                                     }
+                                  }
+                               }
+                            }
+                         }
+                       }
+
+                       catch(MyException e)
+                       {
+                             System.out.println("Attempt to reference " + Operand + ", an undefined symbol");
+                             error = true;
+                             errcode = 5;
+                       }
+
+                       catch(Exception e)
+                       {
+                             System.out.println("Could not cast " + currentSymbolTable.getTypeOf(Operand) + " to " + CastType);
+                             error = true;
+                             errcode = 5;
+                       }              
+                    }
+
+                    else
+                    {
+                       System.out.println(") missing");
+                       error = true;
+                       errcode = 5;
+                    }
+                 }
+
+                 else
+                 {
+                    VarType =  currentSymbolTable.getTypeOf(Operand);
+                   
+                    try
+                    {
+                      if(VarType.comapreTo("char") == 0)
+                      {
+                         error = true;
+                         errcode = 5;
+                         System.out.println("Cannot perform arithmetic operations on " + Operand + ", which is of type char");
+                      }
+
+                      else
+                      {
+                         if(VarType.compareTo("int") == 0)
+                         {
+                            ValueStack.push(new Integer(currentSymbolTable.getIntValueOf(Operand)));
+                         }
+
+                         else
+                         {
+                            if(VarType.compareTo("float") == 0)
+                            {
+                               ValueStack.push(new Float(currentSymbolTable.getFloatValueOf(Operand)));
+                            }
+
+                            else
+                            {
+                               if(VarType.compareTo("double") == 0)
+                               {
+                                  ValueStack.push(new Double(currentSymbolTable.getDoubleValueOf(Operand)));
+                               }
+ 
+                               else
+                               {
+                                  if(VarType.compareTo("boolean") == 0)
+                                  {
+                                     //Boolean support later
+                                  }
+                               }
+                            }
+                         }
+                      }
+                    }
+
+                    catch(MyException e)
+                    {
+                          System.out.println("Attempt to reference " + Operand + " an undefined symbol");
+                          error = true;
+                          errcode = 5;
+                    }
+                    
+                 }
+                       
+           }
+    }
+
+                  
+
+
+    public Expression(String infixExpr)
+    {
+           String token = ""; 
+           String temp = "";
+           VarList = new SymbolTable(); 
+           StringTokenizer tokens = new StringTokenizer(infixExpr, "/*+-()", true);
+           ExprStack = new ObjectStack(tokens.countTokens());
+           ObjectStack TempStack = new ObjectStack(tokens.countTokens()); 
+
+           while(tokens.hasMoreTokens())
+           {
+                 token = tokens.nextToken().trim();
+
+                 if(token.length() != 0 &&
+                    (token.compareTo("/") == 0 ||
+                     token.compareTo("*") == 0 ||
+                     token.compareTo("+") == 0 || 
+                     token.compareTo("-") == 0))
+                 {
+                    TempStack.push(token);
+                 }
+
+                 else
+                 {
+                    if(token.length() != 0 && token.compareTo(")") != 0 && token.compareTo("(") != 0)
+                    {
+                       temp = token;
+
+                       if(!VarList.varExists(temp))
+                       {
+                          VarList.addVariable(temp, "u");
+                       }
+
+                       temp = new StringBuffer(temp).append(" ").toString();
+
+                       ExprStack.push(temp);
+                    }
+
+                    else
+                    {
+                       if(token.length() != 0 && token.compareTo(")") == 0)
+                       {
+                          temp = (String) TempStack.pop();
+
+                          temp = new StringBuffer(temp).append(" ").toString();
+
+                          ExprStack.push(temp);
+                       }
+                    }
+                 }
+                 
+           }
+
+           if(!TempStack.isEmpty())
+           {
+              ExprStack.push(new StringBuffer((String) TempStack.pop()).append(" ").toString());
+           }
+
+           while(!ExprStack.isEmpty())
+           {
+                 TempStack.push(ExprStack.pop());
+           }
+
+           ExprStack = TempStack;
+    }
+
+    /**********************************************************************
+    * Assign values to the variables of this Expression.
+    * @param stdin
+    *     standard input (i.e. the keyboard)
+    * <dt><b>PRE:</b><dd>
+    *     <code>stdin</code> is empty
+    * <dt><b>POST:</b><dd>
+    *     The name of each variable of this Expression has been written to
+    *     the screen, and the user has entered a value (or nothing) for
+    *     each variable.
+    * @exception NumberFormatException
+    *     Indicates that the user entered an illegal value for a variable
+    * <dt><b>3 Examples (based on the expression: net x + rate x - *)
+    *     </b><dd>
+    *     net: 333.89<br>
+    *     x: -2<br>
+    *     rate: 0.75<br>
+    *     <br>
+    *     net: 2.56823<br>
+    *     x:<br>
+    *     rate:<br>
+    *     <br>
+    *     net: 2.56823<br>
+    *     x: 89 (anything)<br>
+    * <dt><b>Notes:</b><dd>
+    *     The order of variables is determined by their positions in
+    *     this Expression.<br>
+    *     The 2nd example would leave variables x and rate unassigned.<br>
+    *     The 3rd example would throw a NumberFormatException; no prompt(s)
+    *     would be given for remaining variable(s).
+    **********************************************************************/
+    public void assignValues(BufferedReader stdin) throws IOException
+    {
+           int i = 0;
+           String VarValue = "";
+
+           while(i < VarList.returnCount())
+           {
+                System.out.print(VarList.getVarName(i) + ": ");
+                VarValue = stdin.readLine().trim();
+
+                if(VarValue.length() != 0)
+                {
+                   double dummy = new Double(VarValue).doubleValue();
+                   VarList.setVarValue(i, VarValue);
+                }
+
+                else
+                {
+                   VarList.setVarValue(i, "u");
+                }
+
+                i++;
+           }
+    }
+
+
+    /**********************************************************************
+    * Compute the value of this Expression.
+    * <dl><dt><b>PRE:</b><dd>
+    *     all variables of this Expression are assigned (i.e. the most
+    *     recent invocation of assignValues for the this Expression has
+    *     left no variable unassigned)
+    * </dl>
+    * @return
+    *     the value of this Expression
+    * @exception IllegalStateException
+    *     Indicates that one or more variables of this Expression are
+    *     unassigned
+    **********************************************************************/
+    public double evaluate()
+    {
+           ObjectStack TempStack = new ObjectStack();
+           ObjectStack HoldStack = new ObjectStack(ExprStack.getCapacity());
+           TempStack = (ObjectStack) ExprStack.clone();
+
+           String element = "";
+           String operator = "";
+           String operand1 = "";
+           String operand2 = "";
+           String result = "";
+           String FinalResult = "";
+           boolean UnaryExpression = false;
+
+           if(TempStack.size() == 1)
+           {
+              FinalResult = VarList.getVarValue(((String) TempStack.pop()).trim());
+              UnaryExpression = true;
+           }
+
+           while(!TempStack.isEmpty() && !UnaryExpression)
+           {
+                 element = ((String) TempStack.pop()).trim();
+
+                 if(element.compareTo("/") == 0 ||
+                    element.compareTo("*") == 0 ||
+                    element.compareTo("+") == 0 ||
+                    element.compareTo("-") == 0)
+                 {
+                    operand2 = VarList.getVarValue(((String) HoldStack.pop()).trim()); 
+                    operand1 = VarList.getVarValue(((String) HoldStack.pop()).trim());
+                    operator = element;
+
+                    if(operand1.compareTo("u") == 0 || operand2.compareTo("u") == 0)
+                    {
+                       throw new IllegalStateException("One or more variables are unassigned.");
+                    }
+
+                    result = compute(operand1, operator, operand2);
+                    FinalResult = result;
+
+                    TempStack.push(result);
+                 }
+
+                 else
+                 {
+                    HoldStack.push(element);
+                 }
+          } 
+
+          return new Double(FinalResult).doubleValue();       
+    }
+
+    private String compute(String op1, String operator, String op2)
+    {
+            double operand1 = new Double(op1).doubleValue();
+            double operand2 = new Double(op2).doubleValue();
+
+            double result = 0;
+
+            if(operator.compareTo("/") == 0)
+            {
+               result = operand1 / operand2;
+            }
+
+            else
+            {
+               if(operator.compareTo("*") == 0)
+               {
+                  result = operand1 * operand2;
+               }
+
+               else
+               {
+                  if(operator.compareTo("+") == 0)
+                  {
+                     result = operand1 + operand2;
+                  }
+
+                  else
+                  {
+                     if(operator.compareTo("-") == 0)
+                     {
+                        result = operand1 - operand2;
+                     }
+                  }
+               }
+            }
+
+            return new Double(result).toString();
+    }
+            
+
+    /**********************************************************************
+    * Generate a string representation of this Expression.
+    * @return
+    *     a string representation of this Expression with current values
+    *     of expression variables shown in parentheses to the right of the
+    *     variables.
+    * <dt><b>4 Examples:</b><dd>
+    *     tax_rate(20.5) gross(30000.0) D2(4500.0) - *<br>
+    *     a(1.0) b(2.0) - c(3.0) * d(0.0) / a(1.0) b(2.0) + *<br>
+    *     a(1.75) b(u) - c(-303.03) * d(u) / a(1.75) b(u) + *<br>
+    *     data(5.0)
+    * <dt><b>Note:</b><dd>
+    *     "(u)" indicates the corresponding variable is unassigned
+    **********************************************************************/
+    public String toString()
+    {
+           String ExprString = "";
+           String element = "";
+           ObjectStack TempStack = new ObjectStack();
+
+           TempStack = (ObjectStack) ExprStack.clone();
+
+           while(!TempStack.isEmpty())
+           {
+                 element = (String) TempStack.pop();
+
+                 if(element.trim().compareTo("/") == 0 ||
+                    element.trim().compareTo("*") == 0 ||
+                    element.trim().compareTo("+") == 0 ||
+                    element.trim().compareTo("-") == 0)
+                 {
+                    ExprString += element;
+                 }
+
+                 else
+                 {
+                    ExprString = ExprString + element.trim() + "(" + VarList.getVarValue(element.trim()) + ") ";
+                 }
+           }
+
+           return ExprString;
+    }
+
+}
+
+class Variable
+{
+      private String VarName;
+      private String VarValue;
+
+      public Variable(String VName)
+      {
+             VarName = VName;
+             VarValue = "u";
+      }
+
+      public Variable(String VName, String VValue)
+      {
+             VarName = VName;
+             VarValue = VValue;
+      }
+
+      public void setValue(String VValue)
+      {
+             VarValue = VValue;
+      }
+
+      public String getName()
+      {
+             return VarName;
+      }
+
+      public String getValue()
+      {
+             try
+             { 
+               return new Double(VarValue).toString();
+             }
+
+             catch(Exception e)
+             {
+                   return VarValue;
+             }
+      }
+} 
+
+class SymbolTable
+{
+      private Vector Variables;
+      private int varcount;
+
+      public SymbolTable()
+      {
+             Variables = new Vector();
+             varcount = 0;
+      }
+
+      public void addVariable(String VarName, String VarValue)
+      {    
+             Variables.addElement(new Variable(VarName, VarValue));
+             varcount++;
+      }
+
+      public String getVarName(int pos) 
+      { 
+             return (((Variable) Variables.elementAt(pos)).getName());
+      }
+
+      public String getVarValue(String VarName)
+      {
+             boolean found = false;
+             int i = 0;
+
+             while(!found && i < varcount)
+             {
+                   found = ((Variable) Variables.elementAt(i)).getName().compareTo(VarName) == 0;
+                   i++;
+             }
+
+             if(found)
+             {
+                return (((Variable) Variables.elementAt(i - 1)).getValue());
+             }
+
+             else
+             {
+                return VarName;
+             }
+      }
+
+      public void setVarValue(int pos, String VarValue)
+      {
+             ((Variable) Variables.elementAt(pos)).setValue(VarValue);
+      }
+
+      public boolean varExists(String VarName)
+      {
+             boolean found = false;
+             int i = 0;
+
+             while(!found && i < varcount)
+             {
+                   found = ((Variable) Variables.elementAt(i)).getName().compareTo(VarName) == 0;
+                   i++;
+             }
+
+             return found;
+      }
+
+      public int returnCount()
+      {
+             return varcount;
+      }
+}
+
+ 

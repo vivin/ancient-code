@@ -1,0 +1,166 @@
+>"This bAdkOde scripts calculates the area of different two dimensional surfaces\nand the surface area and volumes of various three dimensional objects.\n\n";
+
+#
+# Declaration of variables
+#
+
+double side;
+double radius;
+double base;
+double length;
+double breadth;
+double height;
+double slant_height;
+double s;
+double a;
+double b;
+double c;
+double area;
+double surface_area;
+double volume;
+double pi = 3.141592654;
+
+#
+# 2-D Surfaces
+#
+
+>"Square\n------\n\n";
+
+>"Enter side of square: ";
+<side;
+
+area = (side ^ 2.0);
+
+>"\nThe area of the square is: " + area + "\n\n";
+
+
+>"Rectangle\n---------\n\n";
+
+>"Enter length of rectangle: ";
+<length;
+
+>"Enter breadth of rectangle: ";
+<breadth;
+
+area = (length * breadth);
+
+>"\nThe area of the rectangle is: " + area + "\n\n";
+
+
+>"Triangle (First Method)\n-----------------------\n\n";
+
+>"Enter height of triangle: ";
+<height;
+
+>"Enter base of triangle: ";
+<base;
+
+area = ((0.5 * base) * height);
+
+>"\nThe area of the triangle is: " + area + "\n\n";
+
+
+>"Triangle (Second Method)\n------------------------\n\n";
+
+>"Enter side one of triangle: ";
+<a;
+
+>"Enter side two of triangle: ";
+<b;
+
+>"Enter side three of triangle: ";
+<c;
+
+s = ((a + (b + c)) / 2.0);
+area = ((s * ((s - a) * ((s - b) * (s - c)))) ^ 0.5);
+
+>"\nThe area of the triangle is: " + area + "\n\n";
+
+
+>"Circle\n------\n\n";
+
+>"Enter radius of circle: ";
+<radius;
+
+area = (pi * (radius ^ 2.0));
+
+>"\nThe area of the circle is: " + area + "\n\n";
+
+
+#
+# 3-D Objects
+#
+
+>"Cube\n----\n\n";
+
+>"Enter side of cube: ";
+<side;
+
+surface_area = (6.0 * (side ^ 2.0));
+volume = (side ^ 3.0);
+
+>"\nThe surface area of the cube is: " + surface_area;
+>"\nThe volume of the cube is: " + volume + "\n\n";
+
+
+>"Parallelopiped\n--------------\n\n";
+
+>"Enter length of parallelopiped: ";
+<length;
+
+>"Enter breadth of parallelopiped: ";
+<breadth;
+
+>"Enter height of parallelopiped: ";
+<height;
+
+surface_area = ((2.0 * (base * height)) + ((2.0 * (length * breadth)) + (2.0 * (length * height))));
+volume = (length * (breadth * height));
+
+>"\nThe surface area of the parallelopiped is: " + surface_area;
+>"\nThe volume of the parallelopiped is: " + volume + "\n\n";
+
+
+>"Cone\n----\n\n";
+
+>"Enter radius of cone: ";
+<radius;
+
+>"Enter height of cone: ";
+<height;
+
+slant_height = (((radius ^ 2.0) + (height ^ 2.0)) ^ 0.5);
+surface_area = (pi * (radius * slant_height));
+volume = ((1.0 / 3.0) * (pi * ((radius ^ 2.0) * height)));
+
+>"\nThe surface area of the cone is: " + surface_area;
+>"\nThe volume of the cone is: " + volume + "\n\n";
+
+
+>"Cylinder\n--------\n\n";
+
+>"Enter radius of cylinder: ";
+<radius;
+
+>"Enter height of cylinder: ";
+<height;
+
+surface_area = (2.0 * (pi * (radius * height)));
+volume = (pi * ((radius ^ 2.0) * height));
+
+>"\nThe surface area of the cylinder is: " + surface_area;
+>"\nThe volume of the cylinder is: " + volume + "\n\n";
+
+
+>"Sphere\n------\n\n";
+
+>"Enter radius of sphere: ";
+<radius;
+
+surface_area = (4.0 * (pi * (radius ^ 2.0)));
+volume = ((4.0 / 3.0) * (pi * (radius ^ 3.0)));
+
+>"\nThe surface area of the sphere is: " + surface_area;
+>"\nThe volume of the sphere is: " + volume + "\n\n";
+
+>"---- The End ----\n";                     

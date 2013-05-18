@@ -1,0 +1,396 @@
+import java.io.*;
+
+public class pInsert
+{
+       static void main(String[] args) throws IOException
+       {
+              BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+
+              String Exp = "";
+
+              int i = 0;
+              int j = 0;
+              int parens = 0;
+              int parensnow = 0;
+              int finalidx = 0;
+              boolean done = false;
+
+              System.out.print("Enter an expression in infix:");
+              Exp = stdin.readLine();
+
+              System.out.println("Exp: " + Exp);
+
+              i = Exp.length() - 1;
+
+              //Exp = new StringBuffer(Exp).insert(0, '(').toString();
+              //Exp = new StringBuffer(Exp).append(')').toString();
+
+              while(i >= 0)
+              {
+                    if(Exp.charAt(i) == ')')
+                    {
+                       parens++;
+                    }
+
+                    else
+                    {
+                       if(Exp.charAt(i) == '(')
+                       {
+                          parens--;
+                       }
+                    }
+
+                    if(parens == 0 && Exp.charAt(i) == '/')
+                    {
+                       j = i - 1;
+
+                       while(j >= 0 && !done)
+                       {
+                             if(Exp.charAt(j) == ')')
+                             {
+                                parensnow++;
+                             }
+
+                             else
+                             {
+                                if(Exp.charAt(j) == '(')
+                                {
+                                   parensnow--;
+                                }
+                             }
+
+                             if(parensnow == 0 && Exp.charAt(j) == '+' || Exp.charAt(j) == '-' || Exp.charAt(j) == '/' || Exp.charAt(j) == '*')
+                             {
+                                Exp = new StringBuffer(Exp).insert(j + 1, '(').toString();
+                                done = true;
+                                finalidx = j;
+                             }
+
+                             j--;                             
+                       }
+
+                       j = i + 2;
+                       done = false;
+
+                       while(j < Exp.length() && !done)
+                       {
+                             if(Exp.charAt(j) == ')')
+                             {
+                                parensnow++;
+                             }
+
+                             else
+                             {
+                                if(Exp.charAt(j) == '(')
+                                {
+                                   parensnow--;
+                                }
+                             }
+
+                             if(j == Exp.length() - 1)
+                             {
+                                Exp = new StringBuffer(Exp).append(')').toString();
+                                done = true;
+                             }
+
+                             else
+                             {
+                                if(parensnow == 0 && Exp.charAt(j) == '+' || Exp.charAt(j) == '-' || Exp.charAt(j) == '/' || Exp.charAt(j) == '*')
+                                {
+                                   Exp = new StringBuffer(Exp).insert(j, ')').toString();
+                                   done = true;
+                                }
+        
+                                j++;
+                             }
+                       }
+
+                       i = finalidx;
+                    }
+
+                    i--;
+                    done = false;
+              }
+
+              parens = 0;
+ 
+              i = Exp.length() - 1;
+
+              System.out.println(Exp);
+
+              while(i >= 0)
+              {
+                    if(Exp.charAt(i) == ')')
+                    {
+                       parens++;
+                    }
+
+                    else
+                    {
+                       if(Exp.charAt(i) == '(')
+                       {
+                          parens--;
+                       }
+                    }
+
+                    if(parens == 0 && Exp.charAt(i) == '*')
+                    {
+                       j = i - 1;
+
+                       while(j >= 0 && !done)
+                       {
+                             if(Exp.charAt(j) == ')')
+                             {
+                                parensnow++;
+                             }
+
+                             else
+                             {
+                                if(Exp.charAt(j) == '(')
+                                {
+                                   parensnow--;
+                                }
+                             }
+
+                             if(parensnow == 0 && Exp.charAt(j) == '+' || Exp.charAt(j) == '-' || Exp.charAt(j) == '/' || Exp.charAt(j) == '*')
+                             {
+                                Exp = new StringBuffer(Exp).insert(j + 1, '(').toString();
+                                done = true;
+                                finalidx = j;
+                             }
+
+                             j--;                             
+                       }
+
+                       j = i + 2;
+                       done = false;
+
+                       while(j < Exp.length() && !done)
+                       {
+                             if(Exp.charAt(j) == ')')
+                             {
+                                parensnow++;
+                             }
+
+                             else
+                             {
+                                if(Exp.charAt(j) == '(')
+                                {
+                                   parensnow--;
+                                }
+                             }
+
+                             if(j == Exp.length() - 1)
+                             {
+                                Exp = new StringBuffer(Exp).append(')').toString();
+                                done = true;
+                             }
+
+                             else
+                             {
+                                if(parensnow == 0 && Exp.charAt(j) == '+' || Exp.charAt(j) == '-' || Exp.charAt(j) == '/' || Exp.charAt(j) == '*')
+                                {
+                                   Exp = new StringBuffer(Exp).insert(j, ')').toString();
+                                   done = true;
+                                }
+        
+                                j++;
+                             }
+                       }
+
+                       i = finalidx;
+                    }
+
+                    i--;
+                    done = false;
+              }
+
+              parens = 0;
+
+              i = Exp.length() - 1;
+
+              System.out.println(Exp);
+
+              while(i >= 0)
+              {
+                    if(Exp.charAt(i) == ')')
+                    {
+                       parens++;
+                    }
+
+                    else
+                    {
+                       if(Exp.charAt(i) == '(')
+                       {
+                          parens--;
+                       }
+                    }
+
+                    if(parens == 0 && Exp.charAt(i) == '+')
+                    {
+                       j = i - 1;
+
+                       while(j >= 0 && !done)
+                       {
+                             if(Exp.charAt(j) == ')')
+                             {
+                                parensnow++;
+                             }
+
+                             else
+                             {
+                                if(Exp.charAt(j) == '(')
+                                {
+                                   parensnow--;
+                                }
+                             }
+
+                             if(parensnow == 0 && Exp.charAt(j) == '+' || Exp.charAt(j) == '-' || Exp.charAt(j) == '/' || Exp.charAt(j) == '*')
+                             {
+                                Exp = new StringBuffer(Exp).insert(j + 1, '(').toString();
+                                done = true;
+                                finalidx = j;
+                             }
+
+                             j--;                             
+                       }
+
+                       j = i + 2;
+                       done = false;
+
+                       while(j < Exp.length() && !done)
+                       {
+                             if(Exp.charAt(j) == ')')
+                             {
+                                parensnow++;
+                             }
+
+                             else
+                             {
+                                if(Exp.charAt(j) == '(')
+                                {
+                                   parensnow--;
+                                }
+                             }
+
+                             if(j == Exp.length() - 1)
+                             {
+                                Exp = new StringBuffer(Exp).append(')').toString();
+                                done = true;
+                             }
+
+                             else
+                             {
+                                if(parensnow == 0 && Exp.charAt(j) == '+' || Exp.charAt(j) == '-' || Exp.charAt(j) == '/' || Exp.charAt(j) == '*')
+                                {
+                                   Exp = new StringBuffer(Exp).insert(j, ')').toString();
+                                   done = true;
+                                }
+        
+                                j++;
+                             }
+                       }
+
+                       i = finalidx;
+                    }
+
+                    i--;
+                    done = false;
+              }
+
+              parens = 0;
+
+              i = Exp.length() - 1;
+
+              System.out.println(Exp);
+
+              while(i >= 0)
+              {
+                    if(Exp.charAt(i) == ')')
+                    {
+                       parens++;
+                    }
+
+                    else
+                    {
+                       if(Exp.charAt(i) == '(')
+                       {
+                          parens--;
+                       }
+                    }
+
+                    if(parens == 0 && Exp.charAt(i) == '-')
+                    {
+                       j = i - 1;
+
+                       while(j >= 0 && !done)
+                       {
+                             if(Exp.charAt(j) == ')')
+                             {
+                                parensnow++;
+                             }
+
+                             else
+                             {
+                                if(Exp.charAt(j) == '(')
+                                {
+                                   parensnow--;
+                                }
+                             }
+
+                             if(parensnow == 0 && Exp.charAt(j) == '+' || Exp.charAt(j) == '-' || Exp.charAt(j) == '/' || Exp.charAt(j) == '*')
+                             {
+                                Exp = new StringBuffer(Exp).insert(j + 1, '(').toString();
+                                done = true;
+                                finalidx = j;
+                             }
+
+                             j--;                             
+                       }
+
+                       j = i + 2;
+                       done = false;
+
+                       while(j < Exp.length() && !done)
+                       {
+                             if(Exp.charAt(j) == ')')
+                             {
+                                parensnow++;
+                             }
+
+                             else
+                             {
+                                if(Exp.charAt(j) == '(')
+                                {
+                                   parensnow--;
+                                }
+                             }
+
+                             if(j == Exp.length() - 1)
+                             {
+                                Exp = new StringBuffer(Exp).append(')').toString();
+                                done = true;
+                             }
+
+                             else
+                             {
+                                if(parensnow == 0 && Exp.charAt(j) == '+' || Exp.charAt(j) == '-' || Exp.charAt(j) == '/' || Exp.charAt(j) == '*')
+                                {
+                                   Exp = new StringBuffer(Exp).insert(j, ')').toString();
+                                   done = true;
+                                }
+        
+                                j++;
+                             }
+                       }
+
+                       i = finalidx;
+                    }
+
+                    i--;
+                    done = false;
+              }
+
+              System.out.println(Exp);
+       }
+}

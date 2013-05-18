@@ -1,0 +1,5 @@
+boolean a = 5;
+char c = 4;
+<d;
+d=a+c;
+>d;

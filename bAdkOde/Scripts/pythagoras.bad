@@ -1,0 +1,13 @@
+double a, b, Hypotenuse;
+
+>"This bAdkOde script calculates the length of the hyptoenuse of a right triangle.\n";
+
+>"a:";
+<a;
+
+>"b:";
+<b;
+
+Hypotenuse = (((a ^ 2.0) + (b ^ 2.0)) ^ 0.5);
+
+>"\nThe Hypotenuse of the triangle is " + Hypotenuse + "\n";

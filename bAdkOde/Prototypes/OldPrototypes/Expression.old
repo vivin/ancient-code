@@ -1,0 +1,912 @@
+import java.util.*;
+import java.io.*;
+
+public class Expression implements Cloneable
+{
+    ObjectStack ExprStack;
+    symbolTable currentSymbolTable;
+
+    public Expression()
+    {
+           currentSymbolTable = new symbolTable();
+    }
+
+    public Expression(symbolTable thisSymbolTable)
+    {
+           currentSymbolTable = thisSymbolTable;
+    }
+
+    public int evaluateExpression(StringTokenizer expTokens)
+    {
+           Object result = new Object();
+           String Exp = "";
+           String FullExp = "";
+           String VarName = "";
+           String CastType = "";
+           String ExpCastType = "";
+           String ResultType = "";
+           StringTokenizer tokens = new StringTokenizer("");
+           StringTokenizer orig = new StringTokenizer("");
+           int parencount = 0;
+           int errcode = 0;
+           boolean error = false;
+
+           while(expTokens.hasMoreTokens())
+           {
+                 Exp += expTokens.nextToken();
+           }
+
+           if(!Exp.endsWith(";"))
+           {
+              error = true;
+              errcode = 1;
+           }
+
+           else
+           {
+              Exp = new StringBuffer(Exp).deleteCharAt(Exp.length() - 1).toString();
+              FullExp = (String) Exp.clone();
+           }
+
+           tokens = new StringTokenizer(Exp, "= ");
+
+           VarName = tokens.nextToken();
+
+           if(!error && !currentSymbolTable.doesVariableExist(VarName))
+           {
+              error = true;
+              errcode = 8;
+              System.out.print(VarName + " ");
+           }
+
+           Exp = tokens.nextToken().trim();
+
+           if(!error && Exp.compareTo("=") != 0)
+           {
+              errcode = 5;
+              error = true;
+              System.out.println("Assignment symbol \"=\" missing");
+           }
+
+           Exp = "";
+
+           while(tokens.hasMoreTokens())
+           {
+                 Exp += tokens.nextToken();
+           }
+           
+           tokens = new StringTokenizer(Exp, "()+-/*% ");
+
+           orig = (StringTokenizer) tokens.clone();
+
+           if(!error)
+           {
+              Exp = tokens.nextToken();
+
+              if(Exp.compareTo("(") == 0)
+              {
+                 Exp = tokens.nextToken();
+
+                 if(Exp.compareTo("int") == 0 ||
+                    Exp.compareTo("float") == 0 ||
+                    Exp.compareTo("double") == 0)
+                 {
+                    ExpCastType = Exp;
+
+                    Exp = tokens.nextToken();
+
+                    if(Exp.compareTo(")") == 0)
+                    {
+                       Exp = tokens.nextToken();
+
+                       if(Exp.compareTo("(") != 0)
+                       {
+                          ExpCastType = "none";
+                       }
+                    }
+                 }
+              }
+           }
+
+           tokens = (StringTokenizer) orig.clone();
+
+           while(tokens.hasMoreTokens())
+           {
+                 Exp = tokens.nextToken().trim();
+
+                 if(Exp.compareTo("(") == 0)
+                 {
+                    parencount++;
+                 }
+
+                 else
+                 {
+                    if(Exp.compareTo(")") == 0)
+                    {
+                       parencount--;
+                    }
+                 }
+           }
+
+           if(parencount != 0)
+           {
+              error = true;
+              errcode = 11;
+           }
+
+           if(!error)
+           {
+              Exp = "";
+       
+              while(tokens.hasMoreTokens());
+              {
+                    Exp += tokens.nextToken();
+              }
+
+              addToStack(Exp);
+
+              errcode = organizeValueStack();
+
+              if(errcode > 0)
+              {
+                 error = true;
+              }
+
+              if(!error)
+              {
+                 result = evaluateExpression();
+              }
+           }
+
+           return error;
+    }
+
+    public void addToStack(String postfixExpr)
+    {
+           StringTokenizer tokens = new StringTokenizer(postfixExpr);
+           ExprStack = new ObjectStack(tokens.countTokens());
+           ObjectStack TempStack = new ObjectStack(tokens.countTokens());
+
+           while(tokens.hasMoreTokens())
+           {
+                 token = tokens.nextToken().trim();
+
+                 TempStack.push(token);
+           }
+
+           while(!TempStack.isEmpty())
+           {
+                 ExprStack.push(TempStack.pop());
+           }
+    }
+
+    public int organizeValueStack()
+    {
+           ObjectStack TempStack;
+           ObjectStack ValueStack = new ObjectStack(ExprStack.size());
+           String VarOp = "";
+           String VarType = "";
+           String VarValue = "";
+           String CastType = "";
+           String Operand = "";
+           String UnaryOp = "";
+           StringTokenizer VarOpTok = new StringTokenizer("");
+           boolean error = false;
+           int errcode = 0;
+           int sign = 1;
+
+           TempStack = (ObjectStack) ExprStack.clone();
+
+           while(!TempStack.isEmpty() && !error)
+           {
+                 Operand = (String) TempStack.pop();
+
+                 if(Operand.compareTo("-") == 0 ||
+                    Operand.compareTo("+") == 0 ||
+                    Operand.compareTo("/") == 0 ||
+                    Operand.compareTo("*") == 0 ||
+                    Operand.compareTo("%") == 0)
+                 {
+                    ValueStack.push(Operand);
+                 }
+
+                 else
+                 {
+                    if(Operand.compareTo("(") == 0)
+                    {
+                       Operand = (String) TempStack.pop();
+
+                       if(Operand.compareTo("+") == 0 || Operand.compareTo("-") == 0)
+                       {
+                          UnaryOp = (String) Operand.clone();
+                          
+                          VarOp = (String) TempStack.pop();
+                          
+                          Operand = (String) TempStack.pop();
+
+                          if(Operand.compareTo(")") != 0)
+                          {
+                             errcode = 5;
+                             System.out.println(") missing");
+                             error = true;
+                          }
+
+                          VarType = currentSymbolTable.getTypeOf(VarOp);
+                          VarValue = currentSymbolTable.getStringValueOf(VarOp);
+
+                          if(VarValue.compareTo("null") == 0)
+                          {
+                             errcode = 5;
+                             System.out.println(VarOp + " has not been initialized");
+                             error = true;
+                          }
+
+                          if(VarType.compareTo("undefined") == 0)
+                          {
+                             errcode = 5;
+                             System.out.println(VarOp + " does not have a type associated with it");
+                             error = true;
+                          }
+
+                          if(VarType.compareTo("char") == 0)
+                          {
+                             errcode = 5;
+                             System.out.println("Cannot perform arithmetic operations on " + VarOp + " which is of type char");
+                             error = true;
+                          } 
+
+                          if(UnaryOp.compareTo("-") == 0 && !error)
+                          {
+                             sign = -1;
+                          }
+
+                          if(!error)
+                          {
+                             if(VarType.compareTo("double") == 0)
+                             {
+                                ValueStack.push(new Double(sign * currentSymbolTable.getDoubleValueOf(VarOp)));
+                             }
+
+                             else
+                             {
+                                if(VarType.compareTo("float") == 0)
+                                {
+                                   ValueStack.push(new Float(sign * currentSymbolTable.getFloatValueOf(VarOp)));
+                                }
+
+                                else
+                                {
+                                   if(VarType.compareTo("int") == 0)
+                                   {
+                                      ValueStack.push(new Integer(sign * currentSymbolTable.getIntValueOf(VarOp)));
+                                   }
+                                   //boolean later
+                                }
+                             }
+                          }
+                       }
+
+                       else
+                       {
+                          if(!error)
+                          {
+                             CastType = (String) TempStack.pop();
+
+                             Operand = (String) TempStack.pop();
+
+                             if(Operand.compareTo(")") != 0)
+                             {
+                                errcode = 5;
+                                error = true;
+                                System.out.println(") missing");
+                             }
+
+                             if(!error)
+                             {
+                                VarOp = (String) TempStack.pop();
+                                VarType = currentSymbolTable.getTypeOf(VarOp);
+                                VarValue = currentSymbolTable.getStringValueOf(VarOp);
+
+                                if(VarType.compareTo("undefined") == 0)
+                                {
+                                   errcode = 5;
+                                   System.out.println(VarOp + " does not have a type associated with it");
+                                   error = true; 
+                                }
+
+                                if(VarValue.compareTo("null") == 0)
+                                {
+                                   errcode = 5;
+                                   System.out.println(VarOp + " has not been initialized");
+                                   error = true;
+                                }
+         
+                                if(CastType.compareTo("double") == 0)
+                                {
+                                   ValueStack.push(new Double(currentSymbolTable.getDoubleValueOf(VarOp)));
+                                }
+
+                                else
+                                {
+                                   if(CastType.compareTo("float") == 0)
+                                   {
+                                      ValueStack.push(new Float(currentSymbolTable.getFloatValueOf(VarOp)));
+                                   }
+
+                                   else
+                                   {
+                                      if(CastType.compareTo("int") == 0)
+                                      {
+                                         ValueStack.push(new Integer(currentSymbolTable.getIntValueOf(VarOp)));
+                                      }
+                                      //boolean later
+                                   }
+                                }
+                             }
+                          }
+                       } 
+                    }
+
+                    else
+                    {
+                       VarOp = (String) TempStack.pop();
+
+                       VarType = currentSymbolTable.getTypeOf(VarOp);
+                       VarValue = currentSymbolTable.getStringValueOf(VarOp);
+
+                       if(VarType.compareTo("undefined") == 0)
+                       {
+                          errcode = 5;
+                          System.out.println(VarOp + " does not have a type associated with it");
+                          error = true;
+                       }
+
+                       if(VarValue.compareTo("null") == 0)
+                       {
+                          errcode = 5;
+                          System.out.println(VarOp + " has not been initialized");
+                          error = true;
+                       } 
+
+                       if(VarType.compareTo("double") == 0)
+                       {
+                          ValueStack.push(new Double(currentSymbolTable.getDoubleValueOf(VarOp)));
+                       }
+
+                       else
+                       {
+                          if(VarType.compareTo("float") == 0)
+                          {
+                             ValueStack.push(new Float(currentSymbolTable.getFloatValueOf(VarOp)));
+                          }
+
+                          else
+                          {
+                             if(VarType.compareTo("int") == 0)
+                             {
+                                ValueStack.push(new Integer(currentSymbolTable.getIntValueOf(VarOp)));
+                             }
+                          }
+                       }
+                    }
+                 }
+           }
+
+           if(!error)
+           {
+               while(!ValueStack.isEmpty())
+               {
+                     TempStack.push(ValueStack.pop());
+               }
+
+               ExprStack = ValueStack;
+           }
+
+           return errcode;
+    }
+
+    public Object evaluateExpression()
+    {
+           ObjectStack TempStack = new ObjectStack();
+           ObjectStack HoldStack = new ObjectStack(ExprStack.getCapacity());
+           TempStack = (ObjectStack) ExprStack.clone();
+
+           Object element = new Object();
+
+           char operator = "";
+
+           Object operand1 = new Object();
+           Object operand2 = new Object();
+
+           int IntOperand1 = "";
+           int IntOperand2 = "";
+
+           double DoubleOperand1 = "";
+           double DoubleOperand2 = "";
+
+           float FloatOperand1 = "";
+           float FloatOperand2 = "";
+
+           Object result = "";
+           Object FinalResult = new Object();
+
+           boolean UnaryExpression = false;
+
+           if(TempStack.size() == 1)
+           {
+              UnaryExpression = true;
+              element = TempStack.pop();
+
+              if(element instanceof Double)
+              {
+                 FinalResult = new String(((Double) element).doubleValue());
+              }
+
+              else
+              {
+                 if(element instanceof Float)
+                 {
+                    FinalResult = new String(((Float) element).floatValue());
+                 }
+
+                 else
+                 {
+                    if(element instanceof Integer)
+                    {
+                       FinalResult = new String(((Integer) element).intValue());
+                    }
+                 }
+              }
+           }
+
+           while(!TempStack.isEmpty() && !UnaryExpression)
+           {
+                 element = TempStack.pop();
+
+                 if(element instanceof String &&
+                    ((String) element.compareTo("/") == 0 ||
+                     (String) element.compareTo("*") == 0 ||
+                     (String) element.compareTo("+") == 0 ||
+                     (String) element.compareTo("-") == 0 ||
+                     (String) element.compareTo("%") == 0))
+                 {
+                    operand2 = HoldStack.pop(); 
+                    operand1 = HoldStack.pop();
+                    operator = (String) element.charAt(0);
+
+                    result = compute(operand2, operator, operand1);
+
+                    FinalResult = result;
+
+                    TempStack.push(result);
+                 }
+
+                 else
+                 {
+                    HoldStack.push(element);
+                 }
+          } 
+        
+          return result; 
+    }
+
+    private Object compute(Object op1, char operator, Object op2)
+    {
+            double DoubleOp1 = 0;
+            double DoubleOp2 = 0;
+
+            float FloatOp1 = 0;
+            float FloatOp2 = 0;
+
+            int IntOp1 = 0;
+            int IntOp2 = 0;
+
+            Object result = new Object();
+
+            if(op1 instanceof Double)
+            {
+               DoubleOp1 = ((Double) op1).doubleValue();
+
+               if(op2 instanceof Double)
+               {
+                  DoubleOp2 = ((Double) op2).doubleValue();
+
+                  switch(operator)
+                  {
+                         case '%': result = new Double(DoubleOp1 % DoubleOp2);
+                                   break;
+
+                         case '/': result = new Double(DoubleOp1 / DoubleOp2);
+                                   break;
+
+                         case '*': result = new Double(DoubleOp1 * DoubleOp2);
+                                   break;
+
+                         case '+': result = new Double(DoubleOp1 + DoubleOp2);
+                                   break;
+
+                         case '-': result = new Double(DoubleOp1 - DoubleOp2);
+                                   break;
+                  }
+               }
+
+               else
+               {
+                  if(op2 instanceof Float)
+                  {
+                     FloatOp2 = ((Float) op2).floatValue();
+
+                     switch(operator)
+                     {
+                            case '%': result = new Double(DoubleOp1 % FloatOp2);
+                                      break;
+
+                            case '/': result = new Double(DoubleOp1 / FloatOp2);
+                                      break;
+
+                            case '*': result = new Double(DoubleOp1 * FloatOp2);
+                                      break;
+
+                            case '+': result = new Double(DoubleOp1 + FloatOp2);
+                                      break;
+
+                            case '-': result = new Double(DoubleOp1 - FloatOp2);
+                                      break;
+                     }
+                  }
+
+                  else
+                  {
+                     if(op2 instanceof Integer)
+                     {
+                        IntOp2 = ((Integer) op2).intValue();
+
+                        switch(operator)
+                        {
+                               case '%': result = new Double(DoubleOp1 % IntOp2);
+                                         break;
+
+                               case '/': result = new Double(DoubleOp1 / IntOp2);
+                                         break;
+
+                               case '*': result = new Double(DoubleOp1 * IntOp2);
+                                         break;
+
+                               case '+': result = new Double(DoubleOp1 + IntOp2);
+                                         break;
+
+                               case '-': result = new Double(DoubleOp1 - IntOp2);
+                                         break;
+                        }
+                     }
+                  }
+               }
+            }
+
+            else
+            {
+               if(op1 instanceof Float)
+               {
+                  FloatOp1 = ((Float) op1).floatValue();
+
+                  if(op2 instanceof Double)
+                  {
+                     DoubleOp2 = ((Double) op2).doubleValue();
+
+                     switch(operator)
+                     {
+                            case '%': result = new Double(FloatOp1 % DoubleOp2);
+                                      break;
+
+                            case '/': result = new Double(FloatOp1 / DoubleOp2);
+                                      break;
+
+                            case '*': result = new Double(FloatOp1 * DoubleOp2);
+                                      break;
+
+                            case '+': result = new Double(FloatOp1 + DoubleOp2);
+                                      break;
+
+                            case '-': result = new Double(FloatOp1 - DoubleOp2);
+                                      break;
+                     }
+                  }
+
+                  else
+                  {
+                     if(op2 instanceof Float)
+                     {
+                        FloatOp2 = ((Float) op2).floatValue();
+
+                        switch(operator)
+                        {
+                               case '%': result = new Float(FloatOp1 % FloatOp2);
+                                         break;
+
+                               case '/': result = new Float(FloatOp1 / FloatOp2);
+                                         break;
+
+                               case '*': result = new Float(FloatOp1 * FloatOp2);
+                                         break;
+
+                               case '+': result = new Float(FloatOp1 + FloatOp2);
+                                         break;
+
+                               case '-': result = new Float(FloatOp1 - FloatOp2);
+                                         break; 
+                        }
+                     }
+
+                     else
+                     {
+                        if(op2 instanceof Integer)
+                        {
+                           IntOp2 = ((Integer) op2).intValue();
+
+                           switch(operator)
+                           {
+                                  case '%': result = new Float(FloatOp1 % IntOp2);
+                                            break;
+
+                                  case '/': result = new Float(FloatOp1 / FloatOp2);
+                                            break;
+
+                                  case '*': result = new Float(FloatOp1 * FloatOp2);
+                                            break;
+
+                                  case '+': result = new Float(FloatOp1 + FloatOp2);
+                                            break;
+
+                                  case '-': result = new Float(FloatOp1 - FloatOp2);
+                                            break;
+                           }
+                        } 
+                     }
+                  }
+               }
+
+               else
+               {
+                  if(op1 instanceof Integer)
+                  {
+                     IntOp1 = ((Integer) op1).intValue();
+
+                     if(op2 instanceof Double)
+                     {
+                        DoubleOp2 = ((Double) op2).doubleValue();
+
+                        switch(operator)
+                        {
+                               case '%': result = new Double(IntOp1 % DoubleOp2);
+                                         break;
+
+                               case '/': result = new Double(IntOp1 / DoubleOp2);
+                                         break;
+
+                               case '*': result = new Double(IntOp1 * DoubleOp2);
+                                         break;
+
+                               case '+': result = new Double(IntOp1 + DoubleOp2);
+                                         break;
+
+                               case '-': result = new Double(IntOp1 - DoubleOp2);
+                                         break;
+
+                        }
+                     }
+
+                     else
+                     {
+                        if(op2 instanceof Float)
+                        {
+                           FloatOp2 = ((Float) op2).floatValue();
+
+                           switch(operator)
+                           {
+                                  case '%': result = new Float(IntOp1 % FloatOp2);
+                                            break;
+
+                                  case '/': result = new Float(IntOp1 / FloatOp2);
+                                            break;
+
+                                  case '*': result = new Float(IntOp1 * FloatOp2);
+                                            break;
+
+                                  case '+': result = new Float(IntOp1 + FloatOp2);
+                                            break;
+
+                                  case '-': result = new Float(IntOp1 - FloatOp2);
+                                            break;
+                           }
+                        }
+
+                        else
+                        {
+                           if(op2 instanceof Integer)
+                           {
+                              IntOp2 = ((Integer) op2).intValue();
+
+                              switch(operator)
+                              {
+                                     case '%': result = new Integer(IntOp1 % IntOp2);
+                                               break;
+
+                                     case '/': result = new Integer(IntOp1 / IntOp2);
+                                               break;
+
+                                     case '*': result = new Integer(IntOp1 * IntOp2);
+                                               break;
+
+                                     case '+': result = new Integer(IntOp1 + IntOp2);
+                                               break;
+
+                                     case '-': result = new Integer(IntOp1 - IntOp2);
+                                               break;
+                              }
+                           }
+                        }     
+                     }      
+                  }
+               } 
+            }
+
+            return result;
+    }
+            
+
+    /**********************************************************************
+    * Generate a string representation of this Expression.
+    * @return
+    *     a string representation of this Expression with current values
+    *     of expression variables shown in parentheses to the right of the
+    *     variables.
+    * <dt><b>4 Examples:</b><dd>
+    *     tax_rate(20.5) gross(30000.0) D2(4500.0) - *<br>
+    *     a(1.0) b(2.0) - c(3.0) * d(0.0) / a(1.0) b(2.0) + *<br>
+    *     a(1.75) b(u) - c(-303.03) * d(u) / a(1.75) b(u) + *<br>
+    *     data(5.0)
+    * <dt><b>Note:</b><dd>
+    *     "(u)" indicates the corresponding variable is unassigned
+    **********************************************************************/
+    public String toString()
+    {
+           String ExprString = "";
+           String element = "";
+           ObjectStack TempStack = new ObjectStack();
+
+           TempStack = (ObjectStack) ExprStack.clone();
+
+           while(!TempStack.isEmpty())
+           {
+                 element = (String) TempStack.pop();
+
+                 if(element.trim().compareTo("/") == 0 ||
+                    element.trim().compareTo("*") == 0 ||
+                    element.trim().compareTo("+") == 0 ||
+                    element.trim().compareTo("-") == 0)
+                 {
+                    ExprString += element;
+                 }
+
+                 else
+                 {
+                    ExprString = ExprString + element.trim() + "(" + VarList.getVarValue(element.trim()) + ") ";
+                 }
+           }
+
+           return ExprString;
+    }
+
+}
+
+class Variable
+{
+      private String VarName;
+      private String VarValue;
+
+      public Variable(String VName)
+      {
+             VarName = VName;
+             VarValue = "u";
+      }
+
+      public Variable(String VName, String VValue)
+      {
+             VarName = VName;
+             VarValue = VValue;
+      }
+
+      public void setValue(String VValue)
+      {
+             VarValue = VValue;
+      }
+
+      public String getName()
+      {
+             return VarName;
+      }
+
+      public String getValue()
+      {
+             try
+             { 
+               return new Double(VarValue).toString();
+             }
+
+             catch(Exception e)
+             {
+                   return VarValue;
+             }
+      }
+} 
+
+class SymbolTable
+{
+      private Vector Variables;
+      private int varcount;
+
+      public SymbolTable()
+      {
+             Variables = new Vector();
+             varcount = 0;
+      }
+
+      public void addVariable(String VarName, String VarValue)
+      {    
+             Variables.addElement(new Variable(VarName, VarValue));
+             varcount++;
+      }
+
+      public String getVarName(int pos) 
+      { 
+             return (((Variable) Variables.elementAt(pos)).getName());
+      }
+
+      public String getVarValue(String VarName)
+      {
+             boolean found = false;
+             int i = 0;
+
+             while(!found && i < varcount)
+             {
+                   found = ((Variable) Variables.elementAt(i)).getName().compareTo(VarName) == 0;
+                   i++;
+             }
+
+             if(found)
+             {
+                return (((Variable) Variables.elementAt(i - 1)).getValue());
+             }
+
+             else
+             {
+                return VarName;
+             }
+      }
+
+      public void setVarValue(int pos, String VarValue)
+      {
+             ((Variable) Variables.elementAt(pos)).setValue(VarValue);
+      }
+
+      public boolean varExists(String VarName)
+      {
+             boolean found = false;
+             int i = 0;
+
+             while(!found && i < varcount)
+             {
+                   found = ((Variable) Variables.elementAt(i)).getName().compareTo(VarName) == 0;
+                   i++;
+             }
+
+             return found;
+      }
+
+      public int returnCount()
+      {
+             return varcount;
+      }
+}
+
+ 

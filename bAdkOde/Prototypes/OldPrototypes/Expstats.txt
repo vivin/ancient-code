@@ -1,0 +1,43 @@
+All mathematical expressions in bAdkOde will be entered in Postfix.
+Infix is NOT supported... why? Coz I don't want to... I haven't decided it exactly... So I'll use postfix.
+
+a+b is ab+ in postfix and stuff like that...
+
+Casting is possible... this is the tentative syntax. For casting an entire expression:
+
+(int) (ab+)
+
+for casting one variable in a postix expression
+
+(int) ab+
+
+in this syntax, the first variable encountered is casted... in this case, a will be casted.
+
+another valid syntax is
+
+a (int)b +
+
+where, b is casted.
+
+Unary operators will be supported. For example:
+
+(-a)b+
+
+or a(-b)+
+
+unary operators must be enclosed in parantheses.
+
+a-b+ could be valid, but I'll have to look into that... the same goes for -ab+
+
+This entire thing is a valid expression:
+
+(int)d(float)(ab/)+(-x)y+
+
+Something else is that error checking is not complete... improper expressions could cause the interpreter to crash or give improper results... since this is the first time I'm doing this, I'm not all that good at doing all the error checkin for this stuff...
+
+-- Redefinition of specifications
+
+All mathematical expressions in bAdkOde will be fully paranthesised and entered in Infix.
+As of now I haven't decided or an algorithm to check for expressions that are not fully paranthesised. Not conforming to specifications could lead to unreliable or erroneous results.
+
+Mixed type operations are not supported. LValue and the result after evaluating the RValue must be of the same type.

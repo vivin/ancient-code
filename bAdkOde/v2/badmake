@@ -1,0 +1,2 @@
+rm *.class
+javac bAdkOde.java
