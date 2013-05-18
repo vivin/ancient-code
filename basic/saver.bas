@@ -1,0 +1,8 @@
+SCREEN 13
+DO
+  PSET (INT(RND * 320), INT(RND * 200)), INT(RND * 24) + 32
+  FOR I% = 1 TO 4
+    PSET (INT(RND * 320), INT(RND * 200)), 0
+  NEXT I%
+LOOP
+

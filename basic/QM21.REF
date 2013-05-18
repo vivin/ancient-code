@@ -1,0 +1,342 @@
+                        QuestMaker Quick Reference Guide
+                          (C) 1992  Marietta Co-opware             Version 2.2
+ษอออออออออออออออออออออออออออออออออออออป ษอออออออออออออออออออออออออออออออออออออป
+บ QuestMaker Game Help             1a บ บ QuestMaker Script Editor         1b บ
+บอออออออออออออออออออออออออออออออออออออบ บอออออออออออออออออออออออออออออออออออออบ
+บ Function key summary:               บ บ Function and special key summary:   บ
+บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+บ F1  = Game help menu                บ บ F3  =  Sort Script files            บ
+บ F2  = Inventory of items picked up  บ บ a   =  Add                          บ
+บ F3  = Game SAVE                     บ บ f   =  Find                         บ
+บ F4  = Game RESTART                  บ บ e   =  Edit                         บ
+บ F5  = Game RESTORE                  บ บ n   =  Next record                  บ
+บ F6  = not used                      บ บ h   =  Help                         บ
+บ F7  = not used                      บ บ v   =  View a graphic file          บ
+บ F8  = Display character position    บ บ l   =  List data files              บ
+บ F9  = Game speed control            บ บ q   =  Quit editor                  บ
+บ F10 = Quit game and return to menu  บ บ enter = jump to next field          บ
+บ                                     บ บ tab   = jump to next field          บ
+บ Any Alpha = brings up input field   บ บ shift tab = jump to previous field  บ
+บ Cursor Keys = move game character   บ บ del  =  delete data                 บ
+บ Same Cursor Key = stop character    บ บ ESC  =  Accept data and file it     บ
+ศอออออออออออออออออออออออออออออออออออออผ ศอออออออออออออออออออออออออออออออออออออผ
+
+                        QuestMaker Quick Reference Guide
+                          (C) 1992  Marietta Co-opware
+ษอออออออออออออออออออออออออออออออออออออป ษอออออออออออออออออออออออออออออออออออออป
+บ QuestMaker Script Editor         2a บ บ QuestMaker Screen Control Editor 2b บ
+บอออออออออออออออออออออออออออออออออออออบ บอออออออออออออออออออออออออออออออออออออบ
+บ Summary of ACTION Codes:            บ บ Function and special key summary:   บ
+บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+บ 10  = Get object (add to inventory) บ บ  F3 = Sort Screen Control data      บ
+บ 15  = Get hidden object             บ บ                                     บ
+บ 20  = Use object (check inventory)  บ บ   a = Add a new screen number       บ
+บ 30  = Game end due to match input   บ บ   f = Find a record                 บ
+บ 31  = Game end (if object missing)  บ บ   e = Edit a record                 บ
+บ 32  = Game win due to match input   บ บ   n = Next record in data base      บ
+บ 40  = Skip to next Match            บ บ   h = Help                          บ
+บ 50  = Jump to new screen            บ บ   v = View objects you can use      บ
+บ 60  = Position check for response   บ บ   l = List Control data             บ
+บ 70  = User exit to DOS then responseบ บ   q = Quit Screen Control editor    บ
+บ 71  = User exit to DOS no response  บ บ Tab   = next field                  บ
+บ 80  = Use a Quantum Point           บ บ enter = next field                  บ
+บ 85  = Use Quantum Point & Inventory บ บ Esc =  accept data and file it      บ
+บ 90  = Display more text             บ บ Shift Tab = previous field          บ
+ศอออออออออออออออออออออออออออออออออออออผ ศอออออออออออออออออออออออออออออออออออออผ
+
+                        QuestMaker Quick Reference Guide
+                          (C) 1992  Marietta Co-opware
+ษอออออออออออออออออออออออออออออออออออออป ษอออออออออออออออออออออออออออออออออออออป
+บ QuestMaker Screen Control Editor 3a บ บ QuestMaker Screen Control Editor 3b บ
+บอออออออออออออออออออออออออออออออออออออบ บอออออออออออออออออออออออออออออออออออออบ
+บ Summary of Control fields:          บ บ Summary of Borders:                 บ
+บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+บ Controls                            บ บ  Borders determine where you enter  บ
+บ L R T B = Left Right Top Bottom     บ บ  and leave the screen.              บ
+บ   x = no exit to that direction     บ บ                       00            บ
+บ                                     บ บ MAX. Borders  ฺฤฤฤฤฤยฤฤฤฤฤยฤฤฤฤฤฟ   บ
+บ                                     บ บ 00 74 00 24   ณ        T        ณ   บ
+บ Barriers R1 C1 R2 C2 R3 C3 R4 C4    บ บ  L  R  T  B   ณ                 ณ   บ
+บ   Row column numbers                บ บ               ร                 ด   บ
+บ00 00 00 76 24 00 24 76 = No barriersบ บ               ณ                 ณ   บ
+บ                                     บ บ           00  ณ L             R ณ 74บ
+บ  R1 C1 = Top left side              บ บ               ร                 ด   บ
+บ  R2 C2 = Top right side             บ บ L = Left      ณ                 ณ   บ
+บ  R3 C3 = Bottom left side           บ บ R = Right     ณ        B        ณ   บ
+บ  R4 C4 = Bottom right side          บ บ T = Top       ภฤฤฤฤฤมฤฤฤฤฤมฤฤฤฤฤู   บ
+บ                                     บ บ B = Bottom             24           บ
+ศอออออออออออออออออออออออออออออออออออออผ ศอออออออออออออออออออออออออออออออออออออผ
+
+                        QuestMaker Quick Reference Guide
+                          (C) 1992  Marietta Co-opware
+ษอออออออออออออออออออออออออออออออออออออป ษอออออออออออออออออออออออออออออออออออออป
+บ QuestMaker Screen Control Editor 4a บ บ QuestMaker Screen Control Editor 4b บ
+บอออออออออออออออออออออออออออออออออออออบ บอออออออออออออออออออออออออออออออออออออบ
+บ Summary of controls continued:      บ บ Summary of controls continued:      บ
+บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+บ                                     บ บ                                     บ
+บ Reserved = 1 (do not display game   บ บ Walk Behind LC RC                   บ
+บ  when entering screen) for special  บ บ             LC = Left Column        บ
+บ  effects.                           บ บ             RC = Right Column       บ
+บ DOS = 1  PIC = 2  Selects command   บ บ                                     บ
+บ     type for D/P command.           บ บ Walk Behind is for all columns in   บ
+บ Object (A - Z  and a - z)           บ บ             the defined area.       บ
+บ     select  "View" to see objects   บ บ                                     บ
+บ                                     บ บ Quantum Pt Loc is an area defined   บ
+บ Location (R and C) for object       บ บ           by Row and Column which   บ
+บ           R = 0 to 24               บ บ   gives a QUANTUM point when the    บ
+บ           C = 0 to 79               บ บ   game character walks over the     บ
+บ Objects are now placed in row columnบ บ   area specified by R and C.        บ
+บ locations.                          บ บ                                     บ
+ศอออออออออออออออออออออออออออออออออออออผ ศอออออออออออออออออออออออออออออออออออออผ
+
+                        QuestMaker Quick Reference Guide
+                          (C) 1992  Marietta Co-opware
+ษอออออออออออออออออออออออออออออออออออออป ษอออออออออออออออออออออออออออออออออออออป
+บ QuestMaker Screen Control Editor 5a บ บ QuestMaker Screen Control Editor 5b บ
+บอออออออออออออออออออออออออออออออออออออบ บอออออออออออออออออออออออออออออออออออออบ
+บ Summary of controls continued:      บ บ Summary of controls continued:      บ
+บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ บฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤฤบ
+บ                                     บ บ                                     บ
+บ ZAP LOC R and C is an area defined  บ บ COLOR CHG is the color magenta (5)  บ
+บ  by Row and Column numbers that     บ บ changed to the color indicated in   บ
+บ  causes the game to end when the    บ บ field 1 to the color indicted in    บ
+บ  game character comes in contact    บ บ field 2 then back again during      บ
+บ  with that location.  The graphic   บ บ Quantum pick-up for special effects.บ
+บ  GEND.PCX is then displayed.        บ บ                                     บ
+บ                                     บ บ SPARE is used only on Screen G22    บ
+บ ENTRY POSITION is the position      บ บ       to specify the replacement    บ
+บ specified by Row and Column number  บ บ       word for "QUANTUMS".  If      บ
+บ that the game character enters the  บ บ       blank on that screen the word บ
+บ the screen from the Left, Right     บ บ       QUANTUM will be used.         บ
+บ Top or Bottom.                      บ บ       Otherwise it is not used.     บ                                   บ
+บ                                     บ บ                                     บ
+ศอออออออออออออออออออออออออออออออออออออผ ศอออออออออออออออออออออออออออออออออออออผ
+
+
+   How QuestMaker works
+   --------------------
+
+  QuestMaker uses 2 database files for input that gives control to game
+  player input and screen control information.  This simplifies game
+  creation by allowing the game developer to concentrate on the game
+  content and artistic scenes in each game.  The three major steps
+  to creating a QuestMaker game are;
+
+    1. Create a background scene using a Paint program
+          You create a graphic scenes using a .PCX compatible Paint program
+          that presents the scene you want.  You name your scene according
+          to the Graphic Scenes Table below.
+
+    2. Create game character controls for each game scene
+          You define the areas the game character can walk and where
+          you enter and leave a scene.  Also, you define object locations
+          and if sound is played.  This is done using the Screen Control
+          Editor.
+
+    3. Create the game player dialog for each game scene
+          You define game player response according to the matched input
+          and operation codes or ACTION codes you set per player input.
+          You use the Script Editor for this task.
+
+   HINTS
+   -----
+   Print the TUTOR.DOC File for sample game to learn more about QuestMaker.
+   Use Print Screen Function to assist in entering new Screen Control Data.
+   Copy like data first, then go back and edit bounderies and border areas.
+   Remember you can always determine game character position by pressing F8.
+   It is better to delete the SE.DAT and SE.INX files which contain the
+   Script Editor data when starting a game from scratch.  This keeps you
+   from having to worry about the possiblity of similar game player input
+   matches that may be in the sample game you do not want.
+
+  Graphic Screens  (Graphic Scenes Table)
+  ---------------------------------------
+
+  QuestMaker graphics are named and numbered as follows:
+  Each screen graphic is named "Gxy.PCX"  where "xy" is the screen number.
+  QM version 2.1 uses the following 64 valid screen numbers.
+
+     00  10  20  30  40  50  60  70
+     01  11  21  31  41  51  61  71
+     02  12  22  32  42  52  62  72
+     03  13  23  33  43  53  63  73
+     04  14  24  34  44  54  64  74
+     05  15  25  35  45  55  65  75
+     06  16  26  36  46  56  66  76
+     07  17  27  37  47  57  67  77
+
+  QuestMaker automatic start-up screen number is G22.
+  That means the first graphic shown will be G22.PCX.
+
+  ACTION CODES (operational codes)
+
+  (In older versions of QM they were called Hazard Codes)
+
+         10  GET (object if exists)
+                 Game Character Position is checked.
+                 Object in Reserve field is added to inventory.
+         15  GET (hidden object)
+                 Game Character Position is checked.
+                 Object in Reserve field is added to inventory.
+         20  USE it (if you have it)
+                 Inventory is checked.
+         30  GAME END
+                 Game ends on Verb & Subject Match
+         31  GAME END (if Object not in Inventory list)
+                 Game ends if object in Reserved field is not in Inventory
+         40  SKIP (to next match if object in Inventory list)
+                 Reserved field is compared to object list
+         50  JUMP (to new screen number)
+                 Game Character Position is checked.
+                 New screen number is place in reserve field as Gxx,rr,cc
+         60  POSITION (check game character position first)
+                 The position is checked per Position field
+         70  User Exit  (Display Response Script)
+                 A DOS Call is made. Good for adding sound first.
+         71  User Exit  (Do not Display Response Script)
+                 A DOS Call is made. Good for special effects or text.
+         80  Use Quantum Point
+                 If no Quantum Points available player is notified.
+                 Otherwise point is used and script data displayed
+         85  Use Quantum Point and add object to Inventory List
+                 If no Quantum Points available player is notified.
+                 If object already in Inventory, player notified.
+                 The position is checked per Position field
+                 If ok the point is used and script data displayed
+         90  More text is displayed if match occurs for same Verb & Noun
+                 This can be used for creating longer dialogs.
+                 If a match occurs the Operation Code is examined for
+                 new action.
+
+         91  Show Graphic.  Shows the graphic that is named in the
+                 reserved field.  Example "MAP.PCX"
+
+  D/P COMMAND in the Screen Control Editor
+
+       The D/P Command field allows you to enter a DOS COMMAND to be
+       executed after the new screen is displayed.  It is most often
+       used to play music.
+       The DOS COMMAND is executed just as if it was entered from the
+       command line.
+       Caution should be used when using this function.  You should
+       not attempt to change screen modes within your external program
+       or write to the screen where the screen scrolls.  After the DOS
+       command executes the game is continued.
+
+       The D/P Command field can also be used to display a clipped
+       graphic window.  (See DOS=1  PIC=2 field)
+       Clipped graphics are most often used to provide additional pictures
+       or text that can provide the game player with more information
+       when entering a new scene.  The graphic must be a High Resolution
+       640 x 200 16 color EGA mode  .PCX  graphic file.  Clipping
+       is done automatically from the left most corner of the .PCX file
+       to 60 columns and 14 rows.  The clipped is automatically centered
+       when it is displayed.
+
+
+  Row Column numbers
+  -----------------
+
+       QuestMaker Row and Column numbers are now based on the 640 x 200
+       EGA graphics mode with 8 pixels per Row and Column number.
+       640/8 = 80  and 200/8 = 25. When you start counting with 0, it
+       means you have 0 - 79 columns and 0 - 24 rows.  The game character
+       position is calculate from the top left corner of the character.
+       Since the game character usually will have legs, the bottom
+       row calculated from the position of head would be less than 24.
+       In the case of Hero Harry the bottom row is 22.
+
+       Pressing the F8 key will give you current Row and Column number
+       where the game charater is positioned.  Use this number for
+       your game developement when setting barriers and object locations.
+
+
+  Setting the maximum score and game character color
+  --------------------------------------------------
+
+       To change to maximum score which is pre-set to 250,  simply
+       use a text editor and create a file named "MSCORE.NUM" and
+       enter a number from 1 to 9999 followed by a comma and the color
+       number you would like the game character clothes to be.
+       The color defaults to bright white or number 15 if no file MSCORE.NUM
+       is found.  For example the contents of MSCORE.NUM with "0100,14"
+       would put the maximum score at 100 and the game characters color
+       to bright yellow.  "0120,15" would put MAX score to 120 and game
+       character clothes at bright white.
+
+  QM game Distribution
+  --------------------
+
+
+       For those who want to distribute the games they make with Questmaker
+       for a fee or as shareware, you must be a registered user.
+       The QM Runtime program is now included with the QuestMaker
+       program.  To distribute games you create with QuestMaker, simply
+       delete the following files from your game file list.
+
+    These files CAN NOT be distributed with the game you create.
+
+              QMENU.PGM  ---- Development Menu and program information
+              SCE.PGM    ---- Screen Control Editor program file
+              SE.PGM     ---- Script Editor program file
+              QM21.PCX   ---- QuestMaker Copyright and Logo Screen
+              QM21.REF   ---- QuestMaker Quick Reference Guide
+              VIT.EXE    ---- View program for Quick Reference
+              QM21.DOC   ---- QuestMaker Documentation
+              Helv15.FMF ---- Font used in QM21 Editor
+              GRAY.PCX   ---- A graphic background used SCE Editor
+
+       Your game can be started from batch file containing "QM QM21".
+       The first screen to be displayed will be INTRO1.PCX if present.
+       The next screen to be displayed will be INTRO2.PCX if present.
+       QuestMaker will start the game with the G22.PCX graphic and
+       screen control information from the SCE.DAT and SCE.INX files.
+
+    Registered users may distribute the games made with QuestMaker
+    royality free.  You must be a registered user in order to freely
+    distribute the QuestMaker Runtime program files.  The registration
+    fee is very small considering you may profit from distributing our
+    program files.  Second, your registration gets you the latest
+    Version that may contain fixes you need.  Your Registration number
+    should be included in a file named QMR.
+
+
+
+  Additional QuestMaker Offerings
+  -------------------------------
+
+      QM Version 2.20 Developers Kit (special offer)
+
+         Includes:
+
+            QPaint program to create compatible QuestMaker graphic
+                   background scenes.  A simple but fast Paint program.
+            QM Graphics Library of over 100 scenes and clip art.
+                -- Save time by modifing our library of background
+                   scenes and clip art.
+            QM Game Character Editor and Object Editor
+                -- Create your own game characters and game objects
+                   with this bit map editor tool.
+            QM Graphics conversion tools with screen capture utility
+                -- Having trouble with your graphics create program?
+                   Use our screen capture utility to make sure you are
+                   creating compatible QM graphics.
+            Mouse support for those who would like to use a mouse
+                   instead of the cursor keys.
+            Text to Speech program to add PC Speaker voice and special
+                   sound effects.
+            QM latest updates - with new functions, and fixes
+            Tips on how to successfully market your game using the
+            Shareware concept.
+
+      For more information on the QuestMaker Game developers kit
+
+            Write to:
+                     Mariette Co-opware
+                     P. O.  Box 864125
+                     Marietta  GA 30064
+
+
+                  *****  PRESS ESC to QUIT  *****
+

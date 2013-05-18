@@ -1,0 +1,22 @@
+SCREEN 9
+DIM X(2000)
+DIM Y(2000)
+LOCATE 12, 31
+PSET (155, 238)
+PRINT "SDFPIJSFIsdfsdddSD"
+FOR Y = 155 TO 165
+FOR X = 238 TO 400
+IF POINT(X, Y) = 15 THEN X(C) = X: Y(C) = Y: IF C < 726 THEN C = C + 1
+NEXT
+NEXT
+FOR L = 1 TO 10000 * (6 - MSPD)
+NEXT
+FOR L = 0 TO 726
+PSET (X(L), Y(L)), 0
+Y(L) = Y(L) + Z
+X(L) = X(L) + INT(RND * 80) - 40
+Y(L) = Y(L) + INT(RND * 80) - 40
+PSET (X(L), Y(L)), 15
+C = C + 1
+NEXT
+
